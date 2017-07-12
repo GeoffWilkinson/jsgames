@@ -24,6 +24,7 @@ function shipClass() {
 
 	this.init = function(whichGraphic) {
 		this.myBitmap = whichGraphic;
+		this.myFloatingTexts = [];
 		this.reset();
 	}
 
@@ -34,6 +35,7 @@ function shipClass() {
 		this.ang = -0.5 * Math.PI;
 		this.cannonCooldown = 0;
 		this.myShots = [];
+		totalScore = 0;
 	} // end of reset
 
 	this.superclassMove = this.move;
@@ -59,13 +61,13 @@ function shipClass() {
 		this.vX *= SPACESPEED_DECAY_MULT;
 		this.vY *= SPACESPEED_DECAY_MULT;
 
-		for(var i = 0; i < this.myShots.length; i++) {
-			this.myShots[i].move();
-		}
+		this.moveMyObjects(this.myShots);
+		this.moveMyObjects(this.myFloatingTexts);
 	}
 
 	this.cannonFire = function() {
-		this.removeDeadShots();
+		// Since I spawn new objects by shooting, I will remove old ones here too.
+		this.removeMyDeadObjects();
 		if(this.cannonCooldown == 0) {
 			var newShot = new shotClass();
 			newShot.shootFrom(this);
@@ -80,14 +82,6 @@ function shipClass() {
 		}
 	}
 
-	this.removeDeadShots = function() {
-		for(var i = this.myShots.length - 1; i >= 0; i--) {
-			if(this.myShots[i].isDead) {
-				this.myShots.splice(i, 1);
-			}
-		}
-	}
-
 	this.checkMyShipAndShotCollisionAgainst = function(thisEnemy) {
 		if(thisEnemy.isOverlappingPoint(this.x,this.y)) {
 			this.reset();
@@ -95,6 +89,17 @@ function shipClass() {
 		}
 		for(var i = this.myShots.length - 1; i >= 0; i--) {
 			if(this.myShots[i].hitTest(thisEnemy)) {
+				var scoreGained = calculateHitScore();
+				addScoreToTotal(scoreGained);
+
+				var hitScore = new floatingTextClass();
+				hitScore.init(scoreGained, thisEnemy.x, thisEnemy.y, 'yellow');
+				this.myFloatingTexts.push(hitScore);
+
+				var combo = new floatingTextClass();
+				combo.init(hitCombo + "x combo", this.x, this.y, 'yellow');
+				this.myFloatingTexts.push(combo);
+
 				thisEnemy.reset();
 				this.myShots.splice(i, 1);
 				document.getElementById("debugText").innerHTML = "Enemy Blasted!";
@@ -102,10 +107,30 @@ function shipClass() {
 		}
 	}
 
-	this.draw = function() {
-		for(var i = 0; i < this.myShots.length; i++) {
-			this.myShots[i].draw();
+	this.removeMyDeadObjects = function() {
+		removeDeadObjects(this.myShots);
+		removeDeadObjects(this.myFloatingTexts);
+	}
+
+	this.moveMyObjects = function(myArray) {
+		for(var i = 0; i < myArray.length; i++) {
+			if(!myArray[i].isDead) {
+				myArray[i].move();
+			}
 		}
+	}
+
+	this.drawMyObjects = function(myArray) {
+		for(var i = 0; i < myArray.length; i++) {
+			if(!myArray[i].isDead) {
+				myArray[i].draw();
+			}
+		}
+	}
+
+	this.draw = function() {
+		this.drawMyObjects(this.myShots);
+		this.drawMyObjects(this.myFloatingTexts);
 		drawBitmapCenteredAtLocationWithRotation(this.myBitmap, this.x, this.y, this.ang);
 	}
 } // end of class
