@@ -65,6 +65,7 @@ function shipClass() {
 	}
 
 	this.cannonFire = function() {
+		this.removeDeadShots();
 		if(this.cannonCooldown == 0) {
 			var newShot = new shotClass();
 			newShot.shootFrom(this);
@@ -76,6 +77,14 @@ function shipClass() {
 	this.decrementCooldowns = function() {
 		if(this.cannonCooldown > 0) {
 			this.cannonCooldown--;
+		}
+	}
+
+	this.removeDeadShots = function() {
+		for(var i = this.myShots.length - 1; i >= 0; i--) {
+			if(this.myShots[i].isDead) {
+				this.myShots.splice(i, 1);
+			}
 		}
 	}
 

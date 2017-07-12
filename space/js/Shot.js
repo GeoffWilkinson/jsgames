@@ -19,6 +19,8 @@ function shotClass() {
 		if(this.shotLife > 0) {
 			this.shotLife--;
 			this.superclassMove();
+		} else {
+			this.isDead = true;
 		}
 	}
 
@@ -33,15 +35,10 @@ function shotClass() {
 	}
 
 	this.hitTest = function(thisEnemy) {
-		if(this.shotLife <= 0) {
-			return false;
-		}
 		return thisEnemy.isOverlappingPoint(this.x,this.y);
 	}
 
 	this.draw = function() {
-		if(this.shotLife > 0) {
-			colourCircle(this.x, this.y, SHOT_DISPLAY_RADIUS, 'white');
-		}
+		colourCircle(this.x, this.y, SHOT_DISPLAY_RADIUS, 'white');
 	}
 } // end of class
