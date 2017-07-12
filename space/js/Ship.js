@@ -2,6 +2,7 @@
 const SPACESPEED_DECAY_MULT = 0.99;
 const THRUST_POWER = 0.15;
 const TURN_RATE = 0.03;
+const CANNON_BASE_COOLDOWN = 10;
 
 shipClass.prototype = new movingWrapPositionClass(); 
 
@@ -22,7 +23,6 @@ function shipClass() {
 	}
 
 	this.init = function(whichGraphic) {
-		this.myShot = new shotClass();
 		this.myBitmap = whichGraphic;
 		this.reset();
 	}
@@ -31,9 +31,9 @@ function shipClass() {
 
 	this.reset = function() {
 		this.superclassReset();
-
 		this.ang = -0.5 * Math.PI;
-		this.myShot.reset();
+		this.cannonCooldown = 0;
+		this.myShots = [];
 	} // end of reset
 
 	this.superclassMove = this.move;
@@ -54,16 +54,28 @@ function shipClass() {
 		}
 
 		this.superclassMove();
+		this.decrementCooldowns();
 
 		this.xv *= SPACESPEED_DECAY_MULT;
 		this.yv *= SPACESPEED_DECAY_MULT;
 
-		this.myShot.move();
+		for(var i = 0; i < this.myShots.length; i++) {
+			this.myShots[i].move();
+		}
 	}
 
 	this.cannonFire = function() {
-		if(this.myShot.isShotReadyToFire()) {
-			this.myShot.shootFrom(this);
+		if(this.cannonCooldown == 0) {
+			var newShot = new shotClass();
+			newShot.shootFrom(this);
+			this.myShots.push(newShot);
+			this.cannonCooldown = CANNON_BASE_COOLDOWN;
+		}
+	}
+
+	this.decrementCooldowns = function() {
+		if(this.cannonCooldown > 0) {
+			this.cannonCooldown--;
 		}
 	}
 
@@ -72,16 +84,19 @@ function shipClass() {
 			this.reset();
 			document.getElementById("debugText").innerHTML = "Player Crashed!";
 		}
-		if(this.myShot.hitTest(thisEnemy)) {
-			thisEnemy.reset();
-			this.myShot.reset();
-			document.getElementById("debugText").innerHTML = "Enemy Blasted!";
+		for(var i = this.myShots.length - 1; i >= 0; i--) {
+			if(this.myShots[i].hitTest(thisEnemy)) {
+				thisEnemy.reset();
+				this.myShots.splice(i, 1);
+				document.getElementById("debugText").innerHTML = "Enemy Blasted!";
+			}
 		}
 	}
 
 	this.draw = function() {
-		this.myShot.draw();
+		for(var i = 0; i < this.myShots.length; i++) {
+			this.myShots[i].draw();
+		}
 		drawBitmapCenteredAtLocationWithRotation(this.myBitmap, this.x, this.y, this.ang);
 	}
-
 } // end of class
