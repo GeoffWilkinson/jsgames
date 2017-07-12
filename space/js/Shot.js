@@ -28,8 +28,8 @@ function shotClass() {
 		this.x = shipFiring.x;
 		this.y = shipFiring.y;
 
-		this.xv = Math.cos(shipFiring.ang) * SHOT_SPEED + shipFiring.xv;
-		this.yv = Math.sin(shipFiring.ang) * SHOT_SPEED + shipFiring.yv;
+		this.vX = Math.cos(shipFiring.ang) * SHOT_SPEED + shipFiring.vX;
+		this.vY = Math.sin(shipFiring.ang) * SHOT_SPEED + shipFiring.vY;
 
 		this.shotLife = SHOT_LIFE;
 	}

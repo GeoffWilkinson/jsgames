@@ -29,8 +29,8 @@ function UFOClass() {
 		this.cyclesTilDirectionChange--;
 		if(this.cyclesTilDirectionChange < 0) {
 			var randAng = Math.random()*Math.PI*2;
-			this.xv = Math.cos(randAng) * UFO_SPEED;
-			this.yv = Math.sin(randAng) * UFO_SPEED;
+			this.vX = Math.cos(randAng) * UFO_SPEED;
+			this.vY = Math.sin(randAng) * UFO_SPEED;
 			this.cyclesTilDirectionChange = UFO_TIME_BETWEEN_CHANGE_DIR;
 		}
 	}
