@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+</head>
+
+<body>
+
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+
+<script src="js/SoundAndMusic.js"></script>
+
+<script>
+var canvas, canvasContext;
+
+var backgroundMusic = new BackgroundMusicClass();
+
+function mouseupHandler() {
+	backgroundMusic.startOrStopMusic();
+}
+
+function keyPressed(evt) {
+	backgroundMusic.loopSong("gameAudio-effects/Walk_Right_In_1929");
+	evt.preventDefault();
+}
+
+window.onload = function() {
+	var longerSound = new SoundOverlapsClass("gameAudio-effects/longer");
+	var shorterSound = new SoundOverlapsClass("gameAudio-effects/bloop");
+
+	canvas = document.getElementById('gameCanvas');
+	canvasContext = canvas.getContext('2d');
+
+	canvas.addEventListener('mouseup', mouseupHandler);
+	document.addEventListener("keydown", keyPressed);
+
+	canvasContext.fillRect(0, 0, canvas.width, canvas.height);
+
+	backgroundMusic.loopSong("gameAudio-effects/longer");
+}
+
+</script>
+
+</body>
+
+</html>
