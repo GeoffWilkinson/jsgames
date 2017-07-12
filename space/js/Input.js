@@ -10,36 +10,35 @@ const KEY_LETTER_D = 68;
 const KEY_SPACEBAR = 32;
 
 function initInput() {
-  document.addEventListener("keydown", keyPressed);
-  document.addEventListener("keyup", keyReleased);
-  
-  p1.setupControls(KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_SPACEBAR);
+	document.addEventListener("keydown", keyPressed);
+	document.addEventListener("keyup", keyReleased);
+
+	p1.setupControls(KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_SPACEBAR);
 }
 
 function setKeyHoldState(thisKey, thisShip, setTo) {
-  if(thisKey == thisShip.controlKeyForTurnLeft) {
-    thisShip.keyHeld_TurnLeft = setTo;
-  }
-  if(thisKey == thisShip.controlKeyForTurnRight) {
-    thisShip.keyHeld_TurnRight = setTo;
-  }
-  if(thisKey == thisShip.controlKeyForGas) {
-    thisShip.keyHeld_Gas = setTo;
-  }
-  if(thisKey == thisShip.controlKeyForReverse) {
-    thisShip.keyHeld_Reverse = setTo;
-  }
+	if(thisKey == thisShip.controlKeyForTurnLeft) {
+		thisShip.keyHeld_TurnLeft = setTo;
+	}
+	if(thisKey == thisShip.controlKeyForTurnRight) {
+		thisShip.keyHeld_TurnRight = setTo;
+	}
+	if(thisKey == thisShip.controlKeyForGas) {
+		thisShip.keyHeld_Gas = setTo;
+	}
+	if(thisKey == thisShip.controlKeyForReverse) {
+		thisShip.keyHeld_Reverse = setTo;
+	}
 }
 
 function keyPressed(evt) {
-
-  if(evt.keyCode == KEY_SPACEBAR) {
-    p1.cannonFire();
-  }
-  setKeyHoldState(evt.keyCode, p1, true);
-  evt.preventDefault(); // without this, arrow keys scroll the browser!
+	if(evt.keyCode == KEY_SPACEBAR) {
+		p1.cannonFire();
+	}
+	setKeyHoldState(evt.keyCode, p1, true);
+	evt.preventDefault(); // without this, arrow keys scroll the browser!
 }
 
 function keyReleased(evt) {
-  setKeyHoldState(evt.keyCode, p1, false);
+	setKeyHoldState(evt.keyCode, p1, false);
 }
