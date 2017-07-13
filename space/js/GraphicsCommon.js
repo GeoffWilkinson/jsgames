@@ -1,6 +1,28 @@
+function drawBitmapPositionedByTopLeftCorner(graphic, atX, atY) {
+	canvasContext.drawImage(graphic, atX, atY, graphic.width, graphic.height);
+}
+
+function drawBitmapCenteredAtLocation(graphic, atX, atY) {
+	canvasContext.drawImage(graphic, atX - graphic.width/2, atY - graphic.height/2, graphic.width, graphic.height);
+}
+
+function drawBitmapCenteredWithRotation(graphic, atX, atY, withAngle) {
+	canvasContext.save(); // allows us to undo translate movement and rotate spin
+	canvasContext.translate(atX,atY); // sets the point where our graphic will go
+	canvasContext.rotate(withAngle); // sets the rotation
+	canvasContext.drawImage(graphic, -graphic.width/2, -graphic.height/2, graphic.width, graphic.height); // center, draw
+	canvasContext.restore(); // undo the translation movement and rotation since save()
+}
+
 function colourRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColour) {
 	canvasContext.fillStyle = fillColour;
 	canvasContext.fillRect(topLeftX, topLeftY, boxWidth, boxHeight);
+}
+
+function hollowRect(topLeftX, topLeftY, boxWidth, boxHeight, strokeColour, lineThickness) {
+	canvasContext.strokeStyle = strokeColour;
+	canvasContext.lineWidth = lineThickness;
+	canvasContext.strokeRect(topLeftX, topLeftY, boxWidth, boxHeight);
 }
 
 function colourCircle(centerX, centerY, radius, fillColour) {
@@ -17,7 +39,7 @@ function colourText(showWords, textX, textY, fillColour) {
 
 function drawBitmapCenteredAtLocationWithRotation(graphic, atX, atY, withAngle) {
 	canvasContext.save(); // allows us to undo translate movement and rotate spin
-	canvasContext.translate(atX,atY); // sets the point where our graphic will go
+	canvasContext.translate(atX, atY); // sets the point where our graphic will go
 	canvasContext.rotate(withAngle); // sets the rotation
 	canvasContext.drawImage(graphic, -graphic.width/2, -graphic.height/2); // center, draw
 	canvasContext.restore(); // undo the translation movement and rotation since save()
