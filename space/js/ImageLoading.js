@@ -1,5 +1,7 @@
 var playerPic = document.createElement("img");
 var UFOPic = document.createElement("img");
+var shotPic = document.createElement("img");
+var shipExhaustPic = document.createElement("img");
 
 var picsToLoad = 0;
 
@@ -11,19 +13,21 @@ function countLoadedImageAndLaunchIfReady() {
 }
 
 function beginLoadingImage(imgVar, fileName) {
-	imgVar.onload=countLoadedImageAndLaunchIfReady;
-	imgVar.src="images/"+fileName;
+	imgVar.onload = countLoadedImageAndLaunchIfReady;
+	imgVar.src = "images/" + fileName;
 }
 
 function loadImages() {
 	var imageList = [
 	{varName: playerPic, theFile: "ship.png"},
-	{varName: UFOPic, theFile: "ufo.png"}
+	{varName: UFOPic, theFile: "ufo.png"},
+	{varName: shotPic, theFile: "shot.png"},
+	{varName: shipExhaustPic, theFile: "ship_exhaust.png"}
 	];
 
 	picsToLoad = imageList.length;
 
-	for(var i=0;i<imageList.length;i++) {
+	for(var i = 0; i < imageList.length; i++) {
 		beginLoadingImage(imageList[i].varName, imageList[i].theFile);
 	} // end of for imageList
 } // end of function loadImages
