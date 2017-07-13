@@ -38,7 +38,9 @@ function shipClass() {
 		this.cannonCooldown = 0;
 		this.myShots = [];
 		totalScore = 0;
-		this.exhaust.setAnimationSequence([0,1,2], "reverse");
+		this.keyHeldFor = 0;
+		this.exhaustSequence = [0, 1, 2];
+		this.exhaust.setAnimationSequence(this.exhaustSequence, "reverse");
 	} // end of reset
 
 	this.superclassMove = this.move;
@@ -56,7 +58,25 @@ function shipClass() {
 		if(this.keyHeld_Gas) {
 			this.vX += Math.cos(this.ang) * THRUST_POWER;
 			this.vY += Math.sin(this.ang) * THRUST_POWER;
+			this.keyHeldFor++;
+			if(this.keyHeldFor > 45) {
+				this.keyHeldFor = 45;
+			}
+		} else {
+			this.keyHeldFor--;
+			if(this.keyHeldFor < 0) {
+				this.keyHeldFor = 0;
+			}
 		}
+
+		if(this.keyHeldFor <= 5) {
+			this.exhaustSequence = [0, 1, 2];
+		} else if(this.keyHeldFor <= 30) {
+			this.exhaustSequence = [3, 4, 5];
+		} else {
+			this.exhaustSequence = [6, 7, 8];
+		}
+		this.exhaust.setAnimationSequence(this.exhaustSequence, "reverse");
 
 		this.superclassMove();
 		this.decrementCooldowns();
