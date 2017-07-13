@@ -2,6 +2,7 @@ const UFO_SPEED = 1.9;
 const UFO_TIME_BETWEEN_CHANGE_DIR = 85;
 const UFO_COLLISION_RADIUS = 16;
 const UFO_CANNON_BASE_COOLDOWN = 90;
+const UFO_INACCURACY_DEGREES = 10;
 
 const NUM_UFOS = 3;
 var allUFOs = [];
@@ -54,7 +55,7 @@ function UFOClass() {
 	}
 
 	this.aimAt = function(otherEntity) {
-		var inaccuracy = (5 * Math.PI/180) * (Math.random() - 0.5);
+		var inaccuracy = (UFO_INACCURACY_DEGREES * Math.PI/180) * (Math.random() - 0.5);
 		this.ang = Math.atan2(otherEntity.y - this.y, otherEntity.x - this.x);
 	}
 
