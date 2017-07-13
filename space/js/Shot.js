@@ -11,6 +11,7 @@ function shotClass() {
 	this.init = function(whichGraphic) {
 		this.myBitmap = whichGraphic;
 		this.collisionRadius = SHOT_COLLISION_RADIUS;
+		this.isDead = false;
 		this.reset();
 	}
 
@@ -53,6 +54,10 @@ function shotClass() {
 
 	this.detectCollisionWithEntity = function(otherEntity) {
 		if(this.isOverlappingPoint(otherEntity)) {
+			// If anything is hit by a shot that is non player then it must have been because of the player:
+			// Asteroids can only be shot by the player.
+			// Enemies can be shot by the player.
+			// Enemies can be hit by rock fragments as the result of an asteroid being shot by the player.
 			if(otherEntity != p1) {
 				var scoreGained = calculateHitScore();
 				addScoreToTotal(scoreGained);
@@ -65,7 +70,7 @@ function shotClass() {
 				combo.init(hitCombo + "x combo", p1.x, p1.y, 'yellow');
 				allFloatingText.push(combo);
 			}
-			otherEntity.reset();
+			otherEntity.isDead = true;
 			this.isDead = true;
 		}
 	}

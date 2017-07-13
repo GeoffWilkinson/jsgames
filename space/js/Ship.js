@@ -43,6 +43,12 @@ function shipClass() {
 		this.exhaust.setAnimationSequence(this.exhaustSequence, "reverse");
 	} // end of reset
 
+	this.superclassHandleDeath = this.handleDeath;
+
+	this.handleDeath = function() {
+		this.superclassHandleDeath();
+	}
+
 	this.superclassMove = this.move;
 
 	this.move = function() {
@@ -110,7 +116,7 @@ function shipClass() {
 
 	this.checkCollisionWithEntity = function(otherEntity) {
 		if(this.isOverlappingPoint(otherEntity)) {
-			this.reset();
+			this.isDead = true;
 			document.getElementById("debugText").innerHTML = "Player Crashed!";
 		}
 	}

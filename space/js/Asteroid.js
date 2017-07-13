@@ -29,6 +29,13 @@ function asteroidClass() {
 		this.vY = Math.sin(randAng) * ASTEROID_SPEED;
 	} // end of reset
 
+	this.superclassHandleDeath = this.handleDeath;
+
+	this.handleDeath = function() {
+		this.fragment();
+		this.superclassHandleDeath();
+	}
+
 	this.superclassMove = this.move;
 
 	this.move = function() {

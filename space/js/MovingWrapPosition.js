@@ -5,6 +5,8 @@ function movingWrapPositionClass() {
 
 		this.x = canvas.width/2;
 		this.y = canvas.height/2;
+
+		this.isDead = false;
 	} // end of reset
 
 	this.move = function() {
@@ -27,5 +29,9 @@ function movingWrapPositionClass() {
 		if(this.y > canvas.height) {
 			this.y = 0;
 		}
+	}
+
+	this.handleDeath = function() {
+		this.reset();
 	}
 } // end of class
