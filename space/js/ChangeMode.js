@@ -1,5 +1,6 @@
 function switchMode(gameModeIndex, transitionLength) {
 	transitionActive = true;
+	disableInput();
 	initialTransitionTimer = transitionLength;
 	transitionTimer = initialTransitionTimer;
 	// Set next game mode
@@ -17,6 +18,7 @@ function modeTransition() {
 	if(transitionTimer < 0) {
 		transitionTimer = 0;
 		transitionActive = false;
+		enableInput();
 	} else if(transitionTimer < initialTransitionTimer/2) {
 		gameMode[prevGameMode] = false;
 		gameMode[nextGameMode] = true;

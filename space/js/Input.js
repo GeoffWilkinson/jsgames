@@ -10,9 +10,7 @@ const KEY_LETTER_D = 68;
 const KEY_SPACEBAR = 32;
 
 function initInput() {
-	document.addEventListener("keydown", keyPressed);
-	document.addEventListener("keyup", keyReleased);
-
+	enableInput();
 	p1.setupControls(KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_SPACEBAR);
 }
 
@@ -31,6 +29,23 @@ function setKeyHoldState(thisKey, thisShip, setTo) {
 	}
 }
 
+function mouseMoved(evt) {
+	var rect = canvas.getBoundingClientRect();
+	var root = document.documentElement;
+
+	mouseX = evt.clientX - rect.left - root.scrollLeft;
+	mouseY = evt.clientY - rect.top - root.scrollTop;
+	if(gameMode[0]) {
+		checkButtonHover();
+	}
+}
+
+function mouseReleased(evt) {
+	if(gameMode[0]) {
+		handleButtonClick();
+	}
+}
+
 function keyPressed(evt) {
 	if(evt.keyCode == KEY_SPACEBAR) {
 		p1.cannonFire();
@@ -41,4 +56,18 @@ function keyPressed(evt) {
 
 function keyReleased(evt) {
 	setKeyHoldState(evt.keyCode, p1, false);
+}
+
+function enableInput() {
+	document.addEventListener("keydown", keyPressed);
+	document.addEventListener("keyup", keyReleased);
+	document.addEventListener("mousemove", mouseMoved);
+	document.addEventListener("mouseup", mouseReleased);
+}
+
+function disableInput() {
+	document.removeEventListener("keydown", keyPressed);
+	document.removeEventListener("keyup", keyReleased);
+	document.removeEventListener("mousemove", mouseMoved);
+	document.removeEventListener("mouseup", mouseReleased);
 }
