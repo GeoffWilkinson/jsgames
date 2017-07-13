@@ -121,7 +121,7 @@ function shipClass() {
 			document.getElementById("debugText").innerHTML = "Player Crashed!";
 		}
 		for(var i = this.myShots.length - 1; i >= 0; i--) {
-			if(this.myShots[i].hitTest(otherEntity)) {
+			if(this.myShots[i].isOverlappingPoint(otherEntity)) {
 				var scoreGained = calculateHitScore();
 				addScoreToTotal(scoreGained);
 
@@ -133,7 +133,7 @@ function shipClass() {
 				combo.init(hitCombo + "x combo", this.x, this.y, 'yellow');
 				this.myFloatingTexts.push(combo);
 
-				thisEnemy.reset();
+				otherEntity.reset();
 				this.myShots.splice(i, 1);
 				document.getElementById("debugText").innerHTML = "Enemy Blasted!";
 			}

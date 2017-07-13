@@ -1,12 +1,13 @@
-const SHOT_SPEED = 6.0;
+const SHOT_SPEED = 6;
 const SHOT_LIFE = 60;
-const SHOT_DISPLAY_RADIUS = 2.0;
+const SHOT_COLLISION_RADIUS = 2;
 
 shotClass.prototype = new movingWrapPositionClass();
 
 function shotClass() {
 	this.init = function(whichGraphic) {
 		this.myBitmap = whichGraphic;
+		this.collisionRadius = SHOT_COLLISION_RADIUS;
 		this.reset();
 	}
 
@@ -40,8 +41,11 @@ function shotClass() {
 		this.shotLife = SHOT_LIFE;
 	}
 
-	this.hitTest = function(thisEnemy) {
-		return thisEnemy.isOverlappingPoint(this.x,this.y);
+	this.isOverlappingPoint = function(entity) {
+		var distX = Math.abs(this.x - entity.x);
+		var distY = Math.abs(this.y - entity.y);
+		var dist = Math.sqrt(distX * distX + distY * distY);
+		return (dist <= this.collisionRadius + entity.collisionRadius);
 	}
 
 	this.draw = function() {
