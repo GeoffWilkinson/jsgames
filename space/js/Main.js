@@ -3,6 +3,7 @@ var canvas, canvasContext;
 
 var p1 = new shipClass();
 var enemy = new UFOClass();
+var asteroid = new asteroidClass();
 
 // 0: title screen
 // 1: in game
@@ -45,6 +46,8 @@ function loadingDoneSoStartGame() {
 
 	p1.init(playerPic);
 	enemy.init(UFOPic);
+	asteroid.init(asteroidPic);
+
 	initInput(); 
 }
 
@@ -88,13 +91,17 @@ function moveInGame() {
 
 	p1.move();
 	enemy.move();
+	asteroid.move();
+
 	p1.checkMyShipAndShotCollisionAgainst(enemy);
+	p1.checkMyShipAndShotCollisionAgainst(asteroid);
 }
 
 function drawInGame() {
 	colourRect(0, 0, canvas.width, canvas.height, 'black');
 
 	p1.draw();
+	asteroid.draw();
 	enemy.draw();
 
 	drawUI();
