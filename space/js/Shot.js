@@ -1,16 +1,19 @@
 const SHOT_SPEED = 6;
+const FRAGMENT_SPEED = 2;
 const SHOT_LIFE = 60;
 const SHOT_COLLISION_RADIUS = 2;
+const FRAGMENT_COLLISION_RADIUS = 4;
 
 var playerShots = [];
 var enemyShots = [];
+var asteroidFragments = [];
 
 shotClass.prototype = new movingWrapPositionClass();
 
 function shotClass() {
-	this.init = function(whichGraphic) {
+	this.init = function(whichGraphic, collisionRadius) {
 		this.myBitmap = whichGraphic;
-		this.collisionRadius = SHOT_COLLISION_RADIUS;
+		this.collisionRadius = collisionRadius;
 		this.isDead = false;
 		this.reset();
 	}
@@ -34,13 +37,13 @@ function shotClass() {
 		}
 	}
 
-	this.shootFrom = function(shipFiring) {
+	this.shootFrom = function(shipFiring, shotSpeed) {
 		this.x = shipFiring.x;
 		this.y = shipFiring.y;
 		this.ang = shipFiring.ang;
 
-		this.vX = Math.cos(shipFiring.ang) * SHOT_SPEED + shipFiring.vX;
-		this.vY = Math.sin(shipFiring.ang) * SHOT_SPEED + shipFiring.vY;
+		this.vX = Math.cos(shipFiring.ang) * shotSpeed + shipFiring.vX;
+		this.vY = Math.sin(shipFiring.ang) * shotSpeed + shipFiring.vY;
 
 		this.shotLife = SHOT_LIFE;
 	}

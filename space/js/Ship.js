@@ -94,8 +94,8 @@ function shipClass() {
 	this.cannonFire = function() {
 		if(this.cannonCooldown == 0) {
 			var newShot = new shotClass();
-			newShot.init(shotPic);
-			newShot.shootFrom(this);
+			newShot.init(shotPic, SHOT_COLLISION_RADIUS);
+			newShot.shootFrom(this, SHOT_SPEED);
 			playerShots.push(newShot);
 			this.cannonCooldown = CANNON_BASE_COOLDOWN;
 		}

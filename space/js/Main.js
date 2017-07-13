@@ -34,6 +34,7 @@ function removeDeadObjects(myArray) {
 function handleAllDeadObjects() {
 	removeDeadObjects(playerShots);
 	removeDeadObjects(enemyShots);
+	removeDeadObjects(asteroidFragments);
 	removeDeadObjects(allFloatingText);
 	if(p1.isDead) {
 		p1.handleDeath();
@@ -70,6 +71,14 @@ function checkAllCollisions() {
 	}
 	for(var i = 0; i < enemyShots.length; i++) {
 		enemyShots[i].detectCollisionWithEntity(p1);
+	}
+
+	// Asteroid fragment collisions
+	for(var i = 0; i < asteroidFragments.length; i++) {
+		asteroidFragments[i].detectCollisionWithEntity(p1);
+		for(var j = 0; j < allUFOs.length; j++) {
+			asteroidFragments[i].detectCollisionWithEntity(allUFOs[j]);
+		}
 	}
 }
 
@@ -160,6 +169,7 @@ function moveInGame() {
 
 	moveAllGroupEntities(playerShots);
 	moveAllGroupEntities(enemyShots);
+	moveAllGroupEntities(asteroidFragments);
 
 	moveAllGroupEntities(allFloatingText);
 
@@ -172,6 +182,7 @@ function drawInGame() {
 
 	drawAllGroupEntities(playerShots);
 	drawAllGroupEntities(enemyShots);
+	drawAllGroupEntities(asteroidFragments);
 
 	p1.draw();
 
