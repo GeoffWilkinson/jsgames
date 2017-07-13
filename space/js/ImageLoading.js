@@ -1,6 +1,7 @@
 var playerPic = document.createElement("img");
 var UFOPic = document.createElement("img");
 var shotPic = document.createElement("img");
+var asteroidPic = document.createElement("img");
 var shipExhaustPic = document.createElement("img");
 
 var inertiaLogoPic = document.createElement("img");
@@ -28,6 +29,7 @@ function loadImages() {
 	{varName: playerPic, theFile: "ship.png"},
 	{varName: UFOPic, theFile: "ufo.png"},
 	{varName: shotPic, theFile: "shot.png"},
+	{varName: asteroidPic, theFile: "asteroid.png"},
 	{varName: shipExhaustPic, theFile: "ship_exhaust.png"},
 	{varName: inertiaLogoPic, theFile: "inertia_logo.png"},
 	{varName: playButtonPic, theFile: "play_button.png"},
