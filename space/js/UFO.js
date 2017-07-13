@@ -3,7 +3,7 @@ const UFO_SPEED = 1.9;
 const UFO_TIME_BETWEEN_CHANGE_DIR = 85;
 const UFO_COLLISION_RADIUS = 24;
 
-UFOClass.prototype = new movingWrapPositionClass(); 
+UFOClass.prototype = new movingWrapPositionClass();
 
 function UFOClass() {
 	this.init = function(whichGraphic) {
