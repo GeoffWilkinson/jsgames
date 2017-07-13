@@ -3,6 +3,12 @@ var UFOPic = document.createElement("img");
 var shotPic = document.createElement("img");
 var shipExhaustPic = document.createElement("img");
 
+var inertiaLogoPic = document.createElement("img");
+var playButtonPic = document.createElement("img");
+var controlsButtonPic = document.createElement("img");
+var settingsButtonPic = document.createElement("img");
+var creditsButtonPic = document.createElement("img");
+
 var picsToLoad = 0;
 
 function countLoadedImageAndLaunchIfReady() {
@@ -22,7 +28,12 @@ function loadImages() {
 	{varName: playerPic, theFile: "ship.png"},
 	{varName: UFOPic, theFile: "ufo.png"},
 	{varName: shotPic, theFile: "shot.png"},
-	{varName: shipExhaustPic, theFile: "ship_exhaust.png"}
+	{varName: shipExhaustPic, theFile: "ship_exhaust.png"},
+	{varName: inertiaLogoPic, theFile: "inertia_logo.png"},
+	{varName: playButtonPic, theFile: "play_button.png"},
+	{varName: controlsButtonPic, theFile: "controls_button.png"},
+	{varName: settingsButtonPic, theFile: "settings_button.png"},
+	{varName: creditsButtonPic, theFile: "credits_button.png"}
 	];
 
 	picsToLoad = imageList.length;
