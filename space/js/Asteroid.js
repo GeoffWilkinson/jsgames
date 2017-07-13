@@ -2,6 +2,9 @@ const ASTEROID_SPEED = 1.2;
 const MAX_ASTEROIDS_ON_SCREEN = 1;
 const ASTEROID_COLLISION_RADIUS = 46;
 
+const NUM_ASTEROIDS = 2;
+var allAsteroids = [];
+
 asteroidClass.prototype = new movingWrapPositionClass();
 
 function asteroidClass() {

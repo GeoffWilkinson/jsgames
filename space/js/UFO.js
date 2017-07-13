@@ -1,7 +1,7 @@
 const UFO_SPEED = 1.9;
 const UFO_TIME_BETWEEN_CHANGE_DIR = 85;
 const UFO_COLLISION_RADIUS = 16;
-const UFO_CANNON_BASE_COOLDOWN = 45;
+const UFO_CANNON_BASE_COOLDOWN = 90;
 
 const NUM_UFOS = 3;
 var allUFOs = [];

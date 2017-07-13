@@ -2,7 +2,6 @@
 var canvas, canvasContext;
 
 var p1 = new shipClass();
-var asteroid = new asteroidClass();
 
 // 0: title screen
 // 1: in game
@@ -39,9 +38,11 @@ function removeAllDeadObjects() {
 
 function checkAllCollisions() {
 	// Player ship collisions
-	p1.checkCollisionWithEntity(asteroid);
 	for(var i = 0; i < allUFOs.length; i++) {
 		p1.checkCollisionWithEntity(allUFOs[i]);
+	}
+	for(var i = 0; i < allAsteroids.length; i++) {
+		p1.checkCollisionWithEntity(allAsteroids[i]);
 	}
 
 	// Shot collisions
@@ -49,7 +50,9 @@ function checkAllCollisions() {
 		for(var j = 0; j < allUFOs.length; j++) {
 			playerShots[i].detectCollisionWithEntity(allUFOs[j]);
 		}
-		playerShots[i].detectCollisionWithEntity(asteroid);
+		for(var j = 0; j < allAsteroids.length; j++) {
+			playerShots[i].detectCollisionWithEntity(allAsteroids[j]);
+		}
 	}
 	for(var i = 0; i < enemyShots.length; i++) {
 		enemyShots[i].detectCollisionWithEntity(p1);
@@ -80,12 +83,19 @@ function loadingDoneSoStartGame() {
 	var framesPerSecond = 30;
 	setInterval(gameLoop, 1000/framesPerSecond);
 
+	// Initialise player
 	p1.init(playerPic);
-	asteroid.init(asteroidPic);
+	// Initialise all UFOs
 	for(var i = 0; i < NUM_UFOS; i++) {
 		var newUFO = new UFOClass();
 		newUFO.init(UFOPic);
 		allUFOs.push(newUFO);
+	}
+	// Initialise all asteroids
+	for(var i = 0; i < NUM_ASTEROIDS; i++) {
+		var newAsteroid = new asteroidClass();
+		newAsteroid.init(asteroidPic);
+		allAsteroids.push(newAsteroid);
 	}
 
 	initInput(); 
@@ -130,11 +140,13 @@ function moveInGame() {
 	incrementCounters();
 
 	p1.move();
-	asteroid.move();
 
 	moveAllGroupEntities(allUFOs);
+	moveAllGroupEntities(allAsteroids);
+
 	moveAllGroupEntities(playerShots);
 	moveAllGroupEntities(enemyShots);
+
 	moveAllGroupEntities(allFloatingText);
 
 	checkAllCollisions();
@@ -146,14 +158,14 @@ function drawInGame() {
 
 	drawAllGroupEntities(playerShots);
 	drawAllGroupEntities(enemyShots);
-	drawAllGroupEntities(allFloatingText);
 
 	p1.draw();
-	asteroid.draw();
 
+	drawAllGroupEntities(allAsteroids);
 	drawAllGroupEntities(allUFOs);
 
 	drawUI();
+	drawAllGroupEntities(allFloatingText);
 }
 
 function drawUI() {
