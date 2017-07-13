@@ -95,6 +95,7 @@ function moveInGame() {
 
 	p1.checkMyShipAndShotCollisionAgainst(enemy);
 	p1.checkMyShipAndShotCollisionAgainst(asteroid);
+	enemy.checkMyShotCollisionAgainst(p1);
 }
 
 function drawInGame() {

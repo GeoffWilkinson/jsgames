@@ -28,4 +28,20 @@ function movingWrapPositionClass() {
 			this.y = 0;
 		}
 	}
+
+	this.moveMyObjects = function(myArray) {
+		for(var i = 0; i < myArray.length; i++) {
+			if(!myArray[i].isDead) {
+				myArray[i].move();
+			}
+		}
+	}
+
+	this.drawMyObjects = function(myArray) {
+		for(var i = 0; i < myArray.length; i++) {
+			if(!myArray[i].isDead) {
+				myArray[i].draw();
+			}
+		}
+	}
 } // end of class

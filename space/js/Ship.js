@@ -145,29 +145,13 @@ function shipClass() {
 		removeDeadObjects(this.myFloatingTexts);
 	}
 
-	this.moveMyObjects = function(myArray) {
-		for(var i = 0; i < myArray.length; i++) {
-			if(!myArray[i].isDead) {
-				myArray[i].move();
-			}
-		}
-	}
-
-	this.drawMyObjects = function(myArray) {
-		for(var i = 0; i < myArray.length; i++) {
-			if(!myArray[i].isDead) {
-				myArray[i].draw();
-			}
-		}
-	}
-
 	this.draw = function() {
 		this.drawMyObjects(this.myShots);
-		this.drawMyObjects(this.myFloatingTexts);
 		drawBitmapCenteredAtLocationWithRotation(this.myBitmap, this.x, this.y, this.ang);
 		this.exhaust.tickAnimation();
 		var offsetX = Math.cos(this.ang) * (-32);
 		var offsetY = Math.sin(this.ang) * (-32);
 		this.exhaust.draw(this.x + offsetX, this.y + offsetY, this.ang);
+		this.drawMyObjects(this.myFloatingTexts);
 	}
 } // end of class
