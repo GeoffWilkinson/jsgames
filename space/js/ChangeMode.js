@@ -1,6 +1,6 @@
 function switchMode(gameModeIndex, transitionLength) {
 	transitionActive = true;
-	initialTransitionTimer = 90;
+	initialTransitionTimer = transitionLength;
 	transitionTimer = initialTransitionTimer;
 	// Set next game mode
 	nextGameMode = gameModeIndex;
