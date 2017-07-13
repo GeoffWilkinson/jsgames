@@ -25,7 +25,6 @@ function shipClass() {
 
 	this.init = function(whichGraphic) {
 		this.myBitmap = whichGraphic;
-		this.myFloatingTexts = [];
 		this.exhaust = new animatedSprite();
 		this.exhaust.init(shipExhaustPic, 3, 3);
 		this.collisionRadius = SHIP_COLLISION_RADIUS;
@@ -38,7 +37,6 @@ function shipClass() {
 		this.superclassReset();
 		this.ang = -0.5 * Math.PI;
 		this.cannonCooldown = 0;
-		this.myShots = [];
 		totalScore = 0;
 		this.keyHeldFor = 0;
 		this.exhaustSequence = [0, 1, 2];
@@ -85,19 +83,14 @@ function shipClass() {
 
 		this.vX *= SPACESPEED_DECAY_MULT;
 		this.vY *= SPACESPEED_DECAY_MULT;
-
-		this.moveMyObjects(this.myShots);
-		this.moveMyObjects(this.myFloatingTexts);
 	}
 
 	this.cannonFire = function() {
-		// Since I spawn new objects by shooting, I will remove old ones here too.
-		this.removeMyDeadObjects();
 		if(this.cannonCooldown == 0) {
 			var newShot = new shotClass();
 			newShot.init(shotPic);
 			newShot.shootFrom(this);
-			this.myShots.push(newShot);
+			playerShots.push(newShot);
 			this.cannonCooldown = CANNON_BASE_COOLDOWN;
 		}
 	}
@@ -115,43 +108,18 @@ function shipClass() {
 		return (dist <= this.collisionRadius + entity.collisionRadius);
 	}
 
-	this.checkMyShipAndShotCollisionAgainst = function(otherEntity) {
+	this.checkCollisionWithEntity = function(otherEntity) {
 		if(this.isOverlappingPoint(otherEntity)) {
 			this.reset();
 			document.getElementById("debugText").innerHTML = "Player Crashed!";
 		}
-		for(var i = this.myShots.length - 1; i >= 0; i--) {
-			if(this.myShots[i].isOverlappingPoint(otherEntity)) {
-				var scoreGained = calculateHitScore();
-				addScoreToTotal(scoreGained);
-
-				var hitScore = new floatingTextClass();
-				hitScore.init(scoreGained, otherEntity.x, otherEntity.y, 'yellow');
-				this.myFloatingTexts.push(hitScore);
-
-				var combo = new floatingTextClass();
-				combo.init(hitCombo + "x combo", this.x, this.y, 'yellow');
-				this.myFloatingTexts.push(combo);
-
-				otherEntity.reset();
-				this.myShots.splice(i, 1);
-				document.getElementById("debugText").innerHTML = "Enemy Blasted!";
-			}
-		}
-	}
-
-	this.removeMyDeadObjects = function() {
-		removeDeadObjects(this.myShots);
-		removeDeadObjects(this.myFloatingTexts);
 	}
 
 	this.draw = function() {
-		this.drawMyObjects(this.myShots);
 		drawBitmapCenteredAtLocationWithRotation(this.myBitmap, this.x, this.y, this.ang);
 		this.exhaust.tickAnimation();
 		var offsetX = Math.cos(this.ang) * (-32);
 		var offsetY = Math.sin(this.ang) * (-32);
 		this.exhaust.draw(this.x + offsetX, this.y + offsetY, this.ang);
-		this.drawMyObjects(this.myFloatingTexts);
 	}
 } // end of class

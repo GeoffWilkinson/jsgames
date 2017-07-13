@@ -1,3 +1,5 @@
+var allFloatingText = [];
+
 function floatingTextClass() {
 	this.init = function(message, xCoord, yCoord, colour) {
 		this.message = message;

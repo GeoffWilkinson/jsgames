@@ -32,6 +32,36 @@ function removeDeadObjects(myArray) {
 	}
 }
 
+function removeAllDeadObjects() {
+	removeDeadObjects(playerShots);
+	removeDeadObjects(enemyShots);
+	removeDeadObjects(allFloatingText);
+}
+
+function checkAllCollisions() {
+	p1.checkCollisionWithEntity(enemy);
+	p1.checkCollisionWithEntity(asteroid);
+	for(var i = 0; i < playerShots.length; i++) {
+		playerShots[i].detectCollisionWithEntity(enemy);
+		playerShots[i].detectCollisionWithEntity(asteroid);
+	}
+	for(var i = 0; i < enemyShots.length; i++) {
+		enemyShots[i].detectCollisionWithEntity(p1);
+	}
+}
+
+function moveAllGroupEntities(entityArray) {
+	for(var i = 0; i < entityArray.length; i++) {
+		entityArray[i].move();
+	}
+}
+
+function drawAllGroupEntities(entityArray) {
+	for(var i = 0; i < entityArray.length; i++) {
+		entityArray[i].draw();
+	}	
+}
+
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
@@ -93,13 +123,20 @@ function moveInGame() {
 	enemy.move();
 	asteroid.move();
 
-	p1.checkMyShipAndShotCollisionAgainst(enemy);
-	p1.checkMyShipAndShotCollisionAgainst(asteroid);
-	enemy.checkMyShotCollisionAgainst(p1);
+	moveAllGroupEntities(playerShots);
+	moveAllGroupEntities(enemyShots);
+	moveAllGroupEntities(allFloatingText);
+
+	checkAllCollisions();
+	removeAllDeadObjects();
 }
 
 function drawInGame() {
 	colourRect(0, 0, canvas.width, canvas.height, 'black');
+
+	drawAllGroupEntities(playerShots);
+	drawAllGroupEntities(enemyShots);
+	drawAllGroupEntities(allFloatingText);
 
 	p1.draw();
 	asteroid.draw();

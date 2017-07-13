@@ -24,7 +24,6 @@ function UFOClass() {
 		this.cyclesTilDirectionChange = 0;
 
 		this.cannonCooldown = 0;
-		this.myShots = [];
 	} // end of reset
 
 	this.superclassMove = this.move;
@@ -49,8 +48,6 @@ function UFOClass() {
 
 		this.aimAt(p1);
 		this.cannonFire();
-
-		this.moveMyObjects(this.myShots);
 	}
 
 	this.aimAt = function(otherEntity) {
@@ -59,13 +56,11 @@ function UFOClass() {
 	}
 
 	this.cannonFire = function() {
-		// Since I spawn new objects by shooting, I will remove old ones here too.
-		this.removeMyDeadObjects();
 		if(this.cannonCooldown == 0) {
 			var newShot = new shotClass();
 			newShot.init(shotPic);
 			newShot.shootFrom(this);
-			this.myShots.push(newShot);
+			enemyShots.push(newShot);
 			this.cannonCooldown = UFO_CANNON_BASE_COOLDOWN;
 		}
 	}
@@ -76,22 +71,7 @@ function UFOClass() {
 		}
 	}
 
-	this.checkMyShotCollisionAgainst = function(otherEntity) {
-		for(var i = this.myShots.length - 1; i >= 0; i--) {
-			if(this.myShots[i].isOverlappingPoint(otherEntity)) {
-				otherEntity.reset();
-				this.myShots.splice(i, 1);
-				document.getElementById("debugText").innerHTML = "Player Blasted!";
-			}
-		}
-	}
-
-	this.removeMyDeadObjects = function() {
-		removeDeadObjects(this.myShots);
-	}
-
 	this.draw = function() {
-		this.drawMyObjects(this.myShots);
 		drawBitmapCenteredAtLocationWithRotation(this.myBitmap, this.x, this.y, this.idleRotation);
 	}
 } // end of class

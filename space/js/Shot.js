@@ -2,6 +2,9 @@ const SHOT_SPEED = 6;
 const SHOT_LIFE = 60;
 const SHOT_COLLISION_RADIUS = 2;
 
+var playerShots = [];
+var enemyShots = [];
+
 shotClass.prototype = new movingWrapPositionClass();
 
 function shotClass() {
@@ -46,6 +49,25 @@ function shotClass() {
 		var distY = Math.abs(this.y - entity.y);
 		var dist = Math.sqrt(distX * distX + distY * distY);
 		return (dist <= this.collisionRadius + entity.collisionRadius);
+	}
+
+	this.detectCollisionWithEntity = function(otherEntity) {
+		if(this.isOverlappingPoint(otherEntity)) {
+			if(otherEntity != p1) {
+				var scoreGained = calculateHitScore();
+				addScoreToTotal(scoreGained);
+
+				var hitScore = new floatingTextClass();
+				hitScore.init(scoreGained, otherEntity.x, otherEntity.y, 'yellow');
+				allFloatingText.push(hitScore);
+
+				var combo = new floatingTextClass();
+				combo.init(hitCombo + "x combo", p1.x, p1.y, 'yellow');
+				allFloatingText.push(combo);
+			}
+			otherEntity.reset();
+			this.isDead = true;
+		}
 	}
 
 	this.draw = function() {
