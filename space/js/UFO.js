@@ -8,6 +8,8 @@ UFOClass.prototype = new movingWrapPositionClass();
 function UFOClass() {
 	this.init = function(whichGraphic) {
 		this.myBitmap = whichGraphic;
+		this.idleRotationDegrees = 0;
+		this.idleRotation = 0;
 		this.reset();
 	}
 
@@ -33,6 +35,12 @@ function UFOClass() {
 			this.vY = Math.sin(randAng) * UFO_SPEED;
 			this.cyclesTilDirectionChange = UFO_TIME_BETWEEN_CHANGE_DIR;
 		}
+
+		this.idleRotationDegrees++;
+		if(this.idleRotationDegrees > 360) {
+			this.idleRotationDegrees = 1;
+		}
+		this.idleRotation = Math.PI * this.idleRotationDegrees / 180;
 	}
 
 	this.isOverlappingPoint = function(testX, testY) {
@@ -43,6 +51,6 @@ function UFOClass() {
 	}
 
 	this.draw = function() {
-		drawBitmapCenteredAtLocationWithRotation(this.myBitmap, this.x, this.y, 0);
+		drawBitmapCenteredAtLocationWithRotation(this.myBitmap, this.x, this.y, this.idleRotation);
 	}
 } // end of class
