@@ -30,8 +30,9 @@ function floatingTextClass() {
 	}
 
 	this.draw = function() {
+		canvasContext.save();
 		canvasContext.globalAlpha = this.opacity;
 		colourText(this.message, this.x, this.y, this.colour);
-		canvasContext.globalAlpha = 1;
+		canvasContext.restore();
 	}
 }
