@@ -65,7 +65,7 @@ function animatedSprite() {
 	this.setAnimationSequence = function(animationFrames, cycleBehaviour) {
 		this.animationFrames = animationFrames;
 		this.cycleBehaviour = cycleBehaviour;
-		this.cycleByThis = 1;
+		this.cycleByThis = this.cycleByThis || 1;
 	}
 
 	this.tickAnimation = function() {
