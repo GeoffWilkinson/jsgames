@@ -68,6 +68,10 @@ function shipClass() {
 			if(this.keyHeldFor > 45) {
 				this.keyHeldFor = 45;
 			}
+		} else if(this.keyHeld_Reverse) {
+			this.vX -= Math.cos(this.ang) * THRUST_POWER/2;
+			this.vY -= Math.sin(this.ang) * THRUST_POWER/2;
+			this.keyHeldFor = 0;
 		} else {
 			this.keyHeldFor--;
 			if(this.keyHeldFor < 0) {
