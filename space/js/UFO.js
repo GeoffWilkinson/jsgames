@@ -3,6 +3,9 @@ const UFO_TIME_BETWEEN_CHANGE_DIR = 85;
 const UFO_COLLISION_RADIUS = 16;
 const UFO_CANNON_BASE_COOLDOWN = 45;
 
+const NUM_UFOS = 3;
+var allUFOs = [];
+
 UFOClass.prototype = new movingWrapPositionClass();
 
 function UFOClass() {

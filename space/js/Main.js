@@ -2,7 +2,6 @@
 var canvas, canvasContext;
 
 var p1 = new shipClass();
-var enemy = new UFOClass();
 var asteroid = new asteroidClass();
 
 // 0: title screen
@@ -39,10 +38,17 @@ function removeAllDeadObjects() {
 }
 
 function checkAllCollisions() {
-	p1.checkCollisionWithEntity(enemy);
+	// Player ship collisions
 	p1.checkCollisionWithEntity(asteroid);
+	for(var i = 0; i < allUFOs.length; i++) {
+		p1.checkCollisionWithEntity(allUFOs[i]);
+	}
+
+	// Shot collisions
 	for(var i = 0; i < playerShots.length; i++) {
-		playerShots[i].detectCollisionWithEntity(enemy);
+		for(var j = 0; j < allUFOs.length; j++) {
+			playerShots[i].detectCollisionWithEntity(allUFOs[j]);
+		}
 		playerShots[i].detectCollisionWithEntity(asteroid);
 	}
 	for(var i = 0; i < enemyShots.length; i++) {
@@ -75,8 +81,12 @@ function loadingDoneSoStartGame() {
 	setInterval(gameLoop, 1000/framesPerSecond);
 
 	p1.init(playerPic);
-	enemy.init(UFOPic);
 	asteroid.init(asteroidPic);
+	for(var i = 0; i < NUM_UFOS; i++) {
+		var newUFO = new UFOClass();
+		newUFO.init(UFOPic);
+		allUFOs.push(newUFO);
+	}
 
 	initInput(); 
 }
@@ -120,9 +130,9 @@ function moveInGame() {
 	incrementCounters();
 
 	p1.move();
-	enemy.move();
 	asteroid.move();
 
+	moveAllGroupEntities(allUFOs);
 	moveAllGroupEntities(playerShots);
 	moveAllGroupEntities(enemyShots);
 	moveAllGroupEntities(allFloatingText);
@@ -140,7 +150,8 @@ function drawInGame() {
 
 	p1.draw();
 	asteroid.draw();
-	enemy.draw();
+
+	drawAllGroupEntities(allUFOs);
 
 	drawUI();
 }
