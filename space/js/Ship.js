@@ -70,6 +70,7 @@ function shipClass() {
 		this.removeMyDeadObjects();
 		if(this.cannonCooldown == 0) {
 			var newShot = new shotClass();
+			newShot.init(shotPic);
 			newShot.shootFrom(this);
 			this.myShots.push(newShot);
 			this.cannonCooldown = CANNON_BASE_COOLDOWN;
