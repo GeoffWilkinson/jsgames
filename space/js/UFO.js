@@ -78,7 +78,6 @@ function UFOClass() {
 
 	this.removeMyDeadObjects = function() {
 		removeDeadObjects(this.myShots);
-		removeDeadObjects(this.myFloatingTexts);
 	}
 
 	this.draw = function() {
