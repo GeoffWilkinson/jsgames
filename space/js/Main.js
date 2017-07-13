@@ -31,10 +31,23 @@ function removeDeadObjects(myArray) {
 	}
 }
 
-function removeAllDeadObjects() {
+function handleAllDeadObjects() {
 	removeDeadObjects(playerShots);
 	removeDeadObjects(enemyShots);
 	removeDeadObjects(allFloatingText);
+	if(p1.isDead) {
+		p1.handleDeath();
+	}
+	for(var i = 0; i < allUFOs.length; i++) {
+		if(allUFOs[i].isDead) {
+			allUFOs[i].handleDeath();
+		}
+	}
+	for(var i = 0; i < allAsteroids.length; i++) {
+		if(allAsteroids[i].isDead) {
+			allAsteroids[i].handleDeath();
+		}
+	}
 }
 
 function checkAllCollisions() {
@@ -151,7 +164,7 @@ function moveInGame() {
 	moveAllGroupEntities(allFloatingText);
 
 	checkAllCollisions();
-	removeAllDeadObjects();
+	handleAllDeadObjects();
 }
 
 function drawInGame() {

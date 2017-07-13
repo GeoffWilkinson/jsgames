@@ -12,6 +12,7 @@ function floatingTextClass() {
 		this.vY = -2;
 		this.opacity = 1;
 		this.framesToFade = 60;
+		this.isDead = false;
 	}
 
 	this.move = function() {
