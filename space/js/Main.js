@@ -4,8 +4,15 @@ var canvas, canvasContext;
 var p1 = new shipClass();
 var enemy = new UFOClass();
 
-var titleScreen = true;
-var inGame = false;
+// 0: title screen
+// 1: in game
+var gameMode = [true, false];
+var nextGameMode = 0;
+var prevGameMode = 0;
+
+var transitionActive = false;
+var transitionTimer = 0;
+var initialTransitionTimer = 1;
 
 function incrementCounters() {
 	timeSinceLastHit++;
@@ -42,12 +49,37 @@ function loadingDoneSoStartGame() {
 }
 
 function gameLoop() {
-	if(titleScreen) {
+	// move everything
+	if(gameMode[0]) {
 		moveTitleScreen();
+	} else if(gameMode[1]) {
+		if(!transitionActive) {
+			moveInGame();
+		}
+	}
+
+	// draw everything
+	if(gameMode[0]) {
 		drawTitleScreen();
-	} else if(inGame) {
-		moveInGame();
+	} else if(gameMode[1]) {
 		drawInGame();
+	}
+
+	// move and draw transitions
+	if(transitionActive) {
+		modeTransition();
+		drawFadeTransition();
+	}
+}
+
+function drawAll() {
+	if(gameMode[0]) {
+		drawTitleScreen();
+	} else if(gameMode[1]) {
+		drawInGame();
+	}
+	if(transitionActive) {
+		drawFadeTransition();
 	}
 }
 
