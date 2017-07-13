@@ -46,11 +46,11 @@ function shipClass() {
 	this.move = function() {
 		// only allow turning while it's moving
 		if(this.keyHeld_TurnLeft) {
-			this.ang -= TURN_RATE*Math.PI;
+			this.ang -= TURN_RATE * Math.PI;
 		}
 
 		if(this.keyHeld_TurnRight) {
-			this.ang += TURN_RATE*Math.PI;
+			this.ang += TURN_RATE * Math.PI;
 		}
 
 		if(this.keyHeld_Gas) {
