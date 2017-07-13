@@ -3,7 +3,7 @@ const SPACESPEED_DECAY_MULT = 0.99;
 const THRUST_POWER = 0.15;
 const TURN_RATE = 0.03;
 const CANNON_BASE_COOLDOWN = 10;
-const SHIP_COLLISION_RADIUS = 28;
+const SHIP_COLLISION_RADIUS = 20;
 
 shipClass.prototype = new movingWrapPositionClass(); 
 
@@ -28,6 +28,7 @@ function shipClass() {
 		this.myFloatingTexts = [];
 		this.exhaust = new animatedSprite();
 		this.exhaust.init(shipExhaustPic, 3, 3);
+		this.collisionRadius = SHIP_COLLISION_RADIUS;
 		this.reset();
 	}
 
@@ -89,13 +90,6 @@ function shipClass() {
 		this.moveMyObjects(this.myFloatingTexts);
 	}
 
-	this.isOverlappingPoint = function(testX, testY) {
-		var deltaX = testX - this.x;
-		var deltaY = testY - this.y;
-		var dist = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
-		return (dist <= SHIP_COLLISION_RADIUS);
-	}
-
 	this.cannonFire = function() {
 		// Since I spawn new objects by shooting, I will remove old ones here too.
 		this.removeMyDeadObjects();
@@ -114,18 +108,25 @@ function shipClass() {
 		}
 	}
 
-	this.checkMyShipAndShotCollisionAgainst = function(thisEnemy) {
-		if(this.isOverlappingPoint(thisEnemy.x, thisEnemy.y)) {
+	this.isOverlappingPoint = function(entity) {
+		var distX = Math.abs(this.x - entity.x);
+		var distY = Math.abs(this.y - entity.y);
+		var dist = Math.sqrt(distX * distX + distY * distY);
+		return (dist <= this.collisionRadius + entity.collisionRadius);
+	}
+
+	this.checkMyShipAndShotCollisionAgainst = function(otherEntity) {
+		if(this.isOverlappingPoint(otherEntity)) {
 			this.reset();
 			document.getElementById("debugText").innerHTML = "Player Crashed!";
 		}
 		for(var i = this.myShots.length - 1; i >= 0; i--) {
-			if(this.myShots[i].hitTest(thisEnemy)) {
+			if(this.myShots[i].hitTest(otherEntity)) {
 				var scoreGained = calculateHitScore();
 				addScoreToTotal(scoreGained);
 
 				var hitScore = new floatingTextClass();
-				hitScore.init(scoreGained, thisEnemy.x, thisEnemy.y, 'yellow');
+				hitScore.init(scoreGained, otherEntity.x, otherEntity.y, 'yellow');
 				this.myFloatingTexts.push(hitScore);
 
 				var combo = new floatingTextClass();
