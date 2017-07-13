@@ -1,6 +1,7 @@
 const UFO_SPEED = 1.9;
 const UFO_TIME_BETWEEN_CHANGE_DIR = 85;
 const UFO_COLLISION_RADIUS = 16;
+const UFO_CANNON_BASE_COOLDOWN = 45;
 
 UFOClass.prototype = new movingWrapPositionClass();
 
@@ -17,6 +18,7 @@ function UFOClass() {
 
 	this.reset = function() {
 		this.superclassReset();
+		this.ang = -0.5 * Math.PI;
 		this.x = Math.random() * canvas.width;
 		this.y = Math.random() * canvas.height;
 		this.cyclesTilDirectionChange = 0;
@@ -45,7 +47,15 @@ function UFOClass() {
 		}
 		this.idleRotation = Math.PI * this.idleRotationDegrees / 180;
 
+		this.aimAt(p1);
+		this.cannonFire();
+
 		this.moveMyObjects(this.myShots);
+	}
+
+	this.aimAt = function(otherEntity) {
+		var inaccuracy = (5 * Math.PI/180) * (Math.random() - 0.5);
+		this.ang = Math.atan2(otherEntity.y - this.y, otherEntity.x - this.x);
 	}
 
 	this.cannonFire = function() {
@@ -56,7 +66,7 @@ function UFOClass() {
 			newShot.init(shotPic);
 			newShot.shootFrom(this);
 			this.myShots.push(newShot);
-			this.cannonCooldown = CANNON_BASE_COOLDOWN;
+			this.cannonCooldown = UFO_CANNON_BASE_COOLDOWN;
 		}
 	}
 
