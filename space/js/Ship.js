@@ -25,6 +25,8 @@ function shipClass() {
 	this.init = function(whichGraphic) {
 		this.myBitmap = whichGraphic;
 		this.myFloatingTexts = [];
+		this.exhaust = new animatedSprite();
+		this.exhaust.init(shipExhaustPic, 3, 3);
 		this.reset();
 	}
 
@@ -36,6 +38,7 @@ function shipClass() {
 		this.cannonCooldown = 0;
 		this.myShots = [];
 		totalScore = 0;
+		this.exhaust.setAnimationSequence([0,1,2], "reverse");
 	} // end of reset
 
 	this.superclassMove = this.move;
@@ -133,5 +136,9 @@ function shipClass() {
 		this.drawMyObjects(this.myShots);
 		this.drawMyObjects(this.myFloatingTexts);
 		drawBitmapCenteredAtLocationWithRotation(this.myBitmap, this.x, this.y, this.ang);
+		this.exhaust.tickAnimation();
+		var offsetX = Math.cos(this.ang) * (-32);
+		var offsetY = Math.sin(this.ang) * (-32);
+		this.exhaust.draw(this.x + offsetX, this.y + offsetY, this.ang);
 	}
 } // end of class
