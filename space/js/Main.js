@@ -4,6 +4,9 @@ var canvas, canvasContext;
 var p1 = new shipClass();
 var enemy = new UFOClass();
 
+var titleScreen = true;
+var inGame = false;
+
 function incrementCounters() {
 	timeSinceLastHit++;
 	if(timeSinceLastHit >= COMBO_TIMEOUT) {
@@ -31,17 +34,24 @@ window.onload = function() {
 function loadingDoneSoStartGame() {
 	// these next few lines set up our game logic and render to happen 30 times per second
 	var framesPerSecond = 30;
-	setInterval(function() {
-		moveEverything();
-		drawEverything();
-	}, 1000/framesPerSecond);
+	setInterval(gameLoop, 1000/framesPerSecond);
 
 	p1.init(playerPic);
 	enemy.init(UFOPic);
 	initInput(); 
 }
 
-function moveEverything() {
+function gameLoop() {
+	if(titleScreen) {
+		moveTitleScreen();
+		drawTitleScreen();
+	} else if(inGame) {
+		moveInGame();
+		drawInGame();
+	}
+}
+
+function moveInGame() {
 	incrementCounters();
 
 	p1.move();
@@ -49,11 +59,15 @@ function moveEverything() {
 	p1.checkMyShipAndShotCollisionAgainst(enemy);
 }
 
-function drawEverything() {
+function drawInGame() {
 	colourRect(0, 0, canvas.width, canvas.height, 'black');
 
 	p1.draw();
 	enemy.draw();
 
+	drawUI();
+}
+
+function drawUI() {
 	drawScore();
 }
