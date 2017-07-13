@@ -3,6 +3,7 @@ const SPACESPEED_DECAY_MULT = 0.99;
 const THRUST_POWER = 0.15;
 const TURN_RATE = 0.03;
 const CANNON_BASE_COOLDOWN = 10;
+const SHIP_COLLISION_RADIUS = 28;
 
 shipClass.prototype = new movingWrapPositionClass(); 
 
@@ -88,6 +89,13 @@ function shipClass() {
 		this.moveMyObjects(this.myFloatingTexts);
 	}
 
+	this.isOverlappingPoint = function(testX, testY) {
+		var deltaX = testX - this.x;
+		var deltaY = testY - this.y;
+		var dist = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
+		return (dist <= SHIP_COLLISION_RADIUS);
+	}
+
 	this.cannonFire = function() {
 		// Since I spawn new objects by shooting, I will remove old ones here too.
 		this.removeMyDeadObjects();
@@ -107,7 +115,7 @@ function shipClass() {
 	}
 
 	this.checkMyShipAndShotCollisionAgainst = function(thisEnemy) {
-		if(thisEnemy.isOverlappingPoint(this.x,this.y)) {
+		if(this.isOverlappingPoint(thisEnemy.x, thisEnemy.y)) {
 			this.reset();
 			document.getElementById("debugText").innerHTML = "Player Crashed!";
 		}
