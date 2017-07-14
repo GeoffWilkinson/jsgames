@@ -49,6 +49,7 @@ function asteroidClass() {
 		this.idleRotation = Math.PI * this.idleRotationDegrees / 180;
 	}
 
+	// arguably this could be a more generic "weapon" but I will leave it as is until it is better to change it.
 	this.fragment = function() {
 		var origX = this.x;
 		var origY = this.y;
