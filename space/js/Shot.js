@@ -1,7 +1,9 @@
 const SHOT_SPEED = 6;
-const FRAGMENT_SPEED = 2;
 const SHOT_LIFE = 60;
 const SHOT_COLLISION_RADIUS = 2;
+
+const FRAGMENT_SPEED = 2;
+const FRAGMENT_LIFE = 45;
 const FRAGMENT_COLLISION_RADIUS = 4;
 
 var playerShots = [];
@@ -37,7 +39,7 @@ function shotClass() {
 		}
 	}
 
-	this.shootFrom = function(shipFiring, shotSpeed) {
+	this.shootFrom = function(shipFiring, shotSpeed, shotLife) {
 		this.x = shipFiring.x;
 		this.y = shipFiring.y;
 		this.ang = shipFiring.ang;
@@ -45,7 +47,7 @@ function shotClass() {
 		this.vX = Math.cos(shipFiring.ang) * shotSpeed + shipFiring.vX;
 		this.vY = Math.sin(shipFiring.ang) * shotSpeed + shipFiring.vY;
 
-		this.shotLife = SHOT_LIFE;
+		this.shotLife = shotLife;
 	}
 
 	this.isOverlappingPoint = function(entity) {

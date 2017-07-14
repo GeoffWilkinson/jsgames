@@ -69,7 +69,7 @@ function UFOClass() {
 		if(this.cannonCooldown == 0) {
 			var newShot = new shotClass();
 			newShot.init(shotPic, SHOT_COLLISION_RADIUS);
-			newShot.shootFrom(this, SHOT_SPEED);
+			newShot.shootFrom(this, SHOT_SPEED, SHOT_LIFE);
 			enemyShots.push(newShot);
 			this.cannonCooldown = UFO_CANNON_BASE_COOLDOWN;
 		}

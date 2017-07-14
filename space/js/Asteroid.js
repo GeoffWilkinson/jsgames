@@ -1,6 +1,5 @@
-const ASTEROID_SPEED = 1.2;
-const MAX_ASTEROIDS_ON_SCREEN = 1;
 const ASTEROID_COLLISION_RADIUS = 46;
+const ASTEROID_SPEED = 1.2;
 const FRAGMENTATION_AMOUNT = 8;
 
 const NUM_ASTEROIDS = 2;
@@ -61,7 +60,7 @@ function asteroidClass() {
 			this.ang += 2 * Math.PI / FRAGMENTATION_AMOUNT;
 			var newShot = new shotClass();
 			newShot.init(rockFragmentPic, FRAGMENT_COLLISION_RADIUS);
-			newShot.shootFrom(this, FRAGMENT_SPEED);
+			newShot.shootFrom(this, FRAGMENT_SPEED, FRAGMENT_LIFE);
 			asteroidFragments.push(newShot);
 			// reset the centre of the asteroid so we draw it properly
 			this.x = origX;

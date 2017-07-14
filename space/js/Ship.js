@@ -99,7 +99,7 @@ function shipClass() {
 		if(this.cannonCooldown == 0) {
 			var newShot = new shotClass();
 			newShot.init(shotPic, SHOT_COLLISION_RADIUS);
-			newShot.shootFrom(this, SHOT_SPEED);
+			newShot.shootFrom(this, SHOT_SPEED, SHOT_LIFE);
 			playerShots.push(newShot);
 			this.cannonCooldown = CANNON_BASE_COOLDOWN;
 		}
