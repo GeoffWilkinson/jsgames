@@ -32,6 +32,14 @@ function colourCircle(centerX, centerY, radius, fillColour) {
 	canvasContext.fill();
 }
 
+function hollowCircle(centerX, centerY, radius, strokeColour, lineThickness) {
+	canvasContext.strokeStyle = strokeColour;
+	canvasContext.lineWidth = lineThickness;
+	canvasContext.beginPath();
+	canvasContext.arc(centerX, centerY, radius, 0, Math.PI*2, true);
+	canvasContext.stroke();
+}
+
 function colourText(showWords, textX, textY, fillColour) {
 	canvasContext.fillStyle = fillColour;
 	canvasContext.fillText(showWords, textX, textY);
