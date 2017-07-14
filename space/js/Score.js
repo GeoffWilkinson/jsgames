@@ -5,6 +5,7 @@ var totalScore = 0;
 var highScore = 0;
 var timeSinceLastHit = COMBO_TIMEOUT;
 var hitCombo = 1;
+var hitComboReset = true;
 
 function calculateHitScore() {
 	timeSinceLastHit = 0;
