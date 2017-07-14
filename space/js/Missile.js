@@ -1,7 +1,7 @@
 const MISSILE_THRUST = 0.15;
 const MISSILE_TURN_RATE = 0.03;
 const MISSILE_LIFE = 120;
-const MISSILE_COLLISION_RADIUS = 2;
+const MISSILE_COLLISION_RADIUS = 3;
 
 var playerMissiles = [];
 
@@ -12,6 +12,10 @@ function missileClass() {
 		this.myBitmap = whichGraphic;
 		this.collisionRadius = collisionRadius;
 		this.isDead = false;
+		this.exhaust = new animatedSprite();
+		this.exhaust.init(missileExhaustPic, 3, 1);
+		this.exhaustSequence = [0, 1, 2];
+		this.exhaust.setAnimationSequence(this.exhaustSequence, "reverse");
 	}
 
 	this.superclassMove = this.move;
@@ -100,5 +104,9 @@ function missileClass() {
 
 	this.draw = function() {
 		drawBitmapCenteredAtLocationWithRotation(this.myBitmap, this.x, this.y, this.ang);
+		this.exhaust.tickAnimation();
+		var offsetX = Math.cos(this.ang) * -8;
+		var offsetY = Math.sin(this.ang) * -8;
+		this.exhaust.draw(this.x + offsetX, this.y + offsetY, this.ang);
 	}
 } // end of class

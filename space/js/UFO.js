@@ -15,7 +15,7 @@ function UFOClass() {
 		this.idleRotationDegrees = 0;
 		this.idleRotation = 0;
 		this.collisionRadius = UFO_COLLISION_RADIUS;
-		this.cannon = new cannonClass(1, UFO_CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, enemyShots);
+		this.cannon = new cannonClass(1, UFO_CANNON_BASE_COOLDOWN, UFOShotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, enemyShots);
 		this.reset();
 	}
 

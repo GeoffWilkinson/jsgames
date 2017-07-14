@@ -42,7 +42,7 @@ function shipClass() {
 		this.collisionRadius = SHIP_COLLISION_RADIUS;
 		this.cannon = new cannonClass(1, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
 		this.shockwaveGenerator = new shockwaveGeneratorClass(1, SHOCKWAVE_BASE_COOLDOWN, SHOCKWAVE_SPEED, SHOCKWAVE_RANGE, SHOCKWAVE_COLOUR, playerShockwaves);
-		this.missileLauncher = new missileLauncherClass(1, MISSILE_BASE_COOLDOWN, shotPic, MISSILE_THRUST, MISSILE_TURN_RATE, MISSILE_LIFE, MISSILE_COLLISION_RADIUS, playerMissiles);
+		this.missileLauncher = new missileLauncherClass(1, MISSILE_BASE_COOLDOWN, missilePic, MISSILE_THRUST, MISSILE_TURN_RATE, MISSILE_LIFE, MISSILE_COLLISION_RADIUS, playerMissiles);
 		this.beamWeapon = new cannonClass(1, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
 		this.weapons = [this.cannon, this.shockwaveGenerator, this.missileLauncher, this.beamWeapon];
 		this.primaryWeapon = this.weapons[0];
