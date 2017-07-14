@@ -121,7 +121,7 @@ function checkAllCollisions() {
 	for(var i = 0; i < asteroidFragments.length; i++) {
 		asteroidFragments[i].detectCollisionWithEntity(p1, false);
 		for(var j = 0; j < allUFOs.length; j++) {
-			asteroidFragments[i].detectCollisionWithEntity(allUFOs[j], false);
+			asteroidFragments[i].detectCollisionWithEntity(allUFOs[j], true);
 		}
 	}
 }
