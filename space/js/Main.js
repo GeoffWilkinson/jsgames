@@ -1,3 +1,12 @@
+// QoL TO DO:
+
+// 1. make the playing field bigger.
+// 2. minimap/HUD to track off screen entities.
+// 3. alternate control schemes...
+// 4. spawn exclusion zone around player for asteroids and UFOs
+// 5. game over screen when player dies
+// 6. stats page upon game over (therefore stat tracking in game)
+
 // save the canvas for dimensions, and its 2d context for drawing to it
 var canvas;
 var canvasContext;
