@@ -31,12 +31,6 @@ function UFOClass() {
 		this.cannonCooldown = 0;
 	} // end of reset
 
-	this.superclassHandleDeath = this.handleDeath;
-
-	this.handleDeath = function() {
-		this.superclassHandleDeath();
-	}
-
 	this.superclassMove = this.move;
 
 	this.move = function() {

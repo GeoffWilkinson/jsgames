@@ -54,18 +54,43 @@ function handleAllDeadObjects() {
 	removeDeadObjects(enemyShots);
 	removeDeadObjects(asteroidFragments);
 	removeDeadObjects(allFloatingText);
-	if(p1.isDead) {
-		p1.handleDeath();
-	}
+
+	// Special case: if a missile was targetting a dead UFO, we clear its target
 	for(var i = 0; i < allUFOs.length; i++) {
 		if(allUFOs[i].isDead) {
-			allUFOs[i].handleDeath();
+			for(var j = 0; j < playerMissiles.length; j++) {
+				if(playerMissiles[j].target == allUFOs[i]) {
+					playerMissiles[j].target = undefined;
+				}
+			}
 		}
 	}
+	removeDeadObjects(allUFOs);
+
+	// Special case: asteroids fragment
 	for(var i = 0; i < allAsteroids.length; i++) {
 		if(allAsteroids[i].isDead) {
-			allAsteroids[i].handleDeath();
+			allAsteroids[i].fragment();
 		}
+	}
+	removeDeadObjects(allAsteroids);
+
+	// Special case: we spawn a new UFO when one dies
+	for(var i = allUFOs.length; i < NUM_UFOS; i++) {
+		var newUFO = new UFOClass();
+		newUFO.init(UFOPic);
+		allUFOs.push(newUFO);
+	}
+	// Special case: we spawn a new asteroid when one dies
+	for(var i = allAsteroids.length; i < NUM_ASTEROIDS; i++) {
+		var newAsteroid = new asteroidClass();
+		newAsteroid.init(asteroidPic);
+		allAsteroids.push(newAsteroid);
+	}
+
+	// Special case: player resets instead of being removed
+	if(p1.isDead) {
+		p1.reset();
 	}
 }
 

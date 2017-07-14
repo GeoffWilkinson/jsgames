@@ -30,8 +30,4 @@ function movingWrapPositionClass() {
 			this.y = 0;
 		}
 	}
-
-	this.handleDeath = function() {
-		this.reset();
-	}
 } // end of class
