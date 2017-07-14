@@ -17,16 +17,7 @@ function shotClass() {
 		this.myBitmap = whichGraphic;
 		this.collisionRadius = collisionRadius;
 		this.isDead = false;
-		this.reset();
 	}
-
-	this.superclassReset = this.reset;
-
-	this.reset = function() {
-		this.superclassReset();
-		this.shotLife = 0;
-		this.ang = 0;
-	} // end of reset
 
 	this.superclassMove = this.move;
 

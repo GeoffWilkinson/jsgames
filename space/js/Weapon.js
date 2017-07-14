@@ -2,6 +2,7 @@ function cannonClass(damage, cooldown, ammoImage, ammoSpeed, ammoLife, ammoColli
 	this.damage = damage;
 	this.cooldown = 0;
 	this.baseCooldown = cooldown;
+
 	this.ammoImage = ammoImage;
 	this.ammoSpeed = ammoSpeed;
 	this.ammoLife = ammoLife;
