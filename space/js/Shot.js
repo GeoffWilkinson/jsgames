@@ -41,15 +41,8 @@ function shotClass() {
 		this.shotLife = shotLife;
 	}
 
-	this.isOverlappingPoint = function(entity) {
-		var distX = Math.abs(this.x - entity.x);
-		var distY = Math.abs(this.y - entity.y);
-		var dist = Math.sqrt(distX * distX + distY * distY);
-		return (dist <= this.collisionRadius + entity.collisionRadius);
-	}
-
 	this.detectCollisionWithEntity = function(otherEntity) {
-		if(this.isOverlappingPoint(otherEntity)) {
+		if(distanceBetween(this, otherEntity) <= this.collisionRadius + otherEntity.collisionRadius) {
 			// If anything is hit by a shot that is non player then it must have been because of the player:
 			// Asteroids can only be shot by the player.
 			// Enemies can be shot by the player.

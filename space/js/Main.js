@@ -23,6 +23,13 @@ var transitionActive = false;
 var transitionTimer = 0;
 var initialTransitionTimer = 1;
 
+function distanceBetween(entity1, entity2) {
+	var distX = Math.abs(entity1.x - entity2.x);
+	var distY = Math.abs(entity1.y - entity2.y);
+	var dist = Math.sqrt(distX * distX + distY * distY);
+	return dist;
+}
+
 function incrementCounters() {
 	timeSinceLastHit++;
 	if(timeSinceLastHit >= COMBO_TIMEOUT) {

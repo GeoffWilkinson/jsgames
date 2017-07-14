@@ -110,15 +110,8 @@ function shipClass() {
 		}
 	}
 
-	this.isOverlappingPoint = function(entity) {
-		var distX = Math.abs(this.x - entity.x);
-		var distY = Math.abs(this.y - entity.y);
-		var dist = Math.sqrt(distX * distX + distY * distY);
-		return (dist <= this.collisionRadius + entity.collisionRadius);
-	}
-
 	this.checkCollisionWithEntity = function(otherEntity) {
-		if(this.isOverlappingPoint(otherEntity)) {
+		if(distanceBetween(this, otherEntity) <= this.collisionRadius + otherEntity.collisionRadius) {
 			this.isDead = true;
 			document.getElementById("debugText").innerHTML = "Player Crashed!";
 		}
