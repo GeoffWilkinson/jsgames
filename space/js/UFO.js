@@ -15,6 +15,7 @@ function UFOClass() {
 		this.idleRotationDegrees = 0;
 		this.idleRotation = 0;
 		this.collisionRadius = UFO_COLLISION_RADIUS;
+		this.cannon = new cannonClass(1, UFO_CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS);
 		this.reset();
 	}
 
@@ -57,7 +58,7 @@ function UFOClass() {
 		this.idleRotation = Math.PI * this.idleRotationDegrees / 180;
 
 		this.aimAt(p1);
-		this.cannonFire();
+		this.fireSelectedWeapon();
 	}
 
 	this.aimAt = function(otherEntity) {
@@ -65,19 +66,16 @@ function UFOClass() {
 		this.ang = Math.atan2(otherEntity.y - this.y, otherEntity.x - this.x);
 	}
 
-	this.cannonFire = function() {
-		if(this.cannonCooldown == 0) {
-			var newShot = new shotClass();
-			newShot.init(shotPic, SHOT_COLLISION_RADIUS);
-			newShot.shootFrom(this, SHOT_SPEED, SHOT_LIFE);
-			enemyShots.push(newShot);
-			this.cannonCooldown = UFO_CANNON_BASE_COOLDOWN;
+	this.fireSelectedWeapon = function() {
+		if(this.cannon.cooldown == 0) {
+			this.cannon.fire(this, enemyShots);
 		}
 	}
 
 	this.decrementCooldowns = function() {
-		if(this.cannonCooldown > 0) {
-			this.cannonCooldown--;
+		this.cannon.cooldown--;
+		if(this.cannon.cooldown < 0) {
+			this.cannon.cooldown = 0;
 		}
 	}
 

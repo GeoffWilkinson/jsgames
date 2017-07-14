@@ -99,7 +99,7 @@ function shipClass() {
 
 	this.fireSelectedWeapon = function() {
 		if(this.cannon.cooldown == 0) {
-			this.cannon.fire(this);
+			this.cannon.fire(this, playerShots);
 		}
 	}
 

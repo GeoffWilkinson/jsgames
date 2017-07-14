@@ -7,11 +7,11 @@ function cannonClass(damage, cooldown, ammoImage, ammoSpeed, ammoLife, ammoColli
 	this.ammoLife = ammoLife;
 	this.ammoCollisionRadius = ammoCollisionRadius;
 
-	this.fire = function(fromThis) {
+	this.fire = function(fromThis, shotGroup) {
 		var newShot = new shotClass();
 		newShot.init(this.ammoImage, this.ammoCollisionRadius);
 		newShot.shootFrom(fromThis, this.ammoSpeed, this.ammoLife);
-		playerShots.push(newShot);
+		shotGroup.push(newShot);
 		this.cooldown = this.baseCooldown;
 	}
 }
