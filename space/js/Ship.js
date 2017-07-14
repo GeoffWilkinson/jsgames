@@ -5,7 +5,7 @@ const TURN_RATE = 0.03;
 const SHIP_COLLISION_RADIUS = 20;
 
 const CANNON_BASE_COOLDOWN = 10;
-const SHOCKWAVE_BASE_COOLDOWN = 20;
+const SHOCKWAVE_BASE_COOLDOWN = 90;
 
 shipClass.prototype = new movingWrapPositionClass(); 
 
@@ -15,14 +15,19 @@ function shipClass() {
 	this.keyHeld_Reverse = false;
 	this.keyHeld_TurnLeft = false;
 	this.keyHeld_TurnRight = false;
+	this.keyHeld_Weapon1 = false;
+	this.keyHeld_Weapon2 = false;
+	this.keyHeld_Shoot = false;
 
 	// key controls used for this 
-	this.setupControls = function(forwardKey, backKey, leftKey, rightKey, spaceBar) {
+	this.setupControls = function(forwardKey, backKey, leftKey, rightKey, key1, key2, spaceBar) {
 		this.controlKeyForGas = forwardKey;
 		this.controlKeyForReverse = backKey;
 		this.controlKeyForTurnLeft = leftKey;
 		this.controlKeyForTurnRight = rightKey;
-		this.shotKey = spaceBar;
+		this.weapon1Key = key1;
+		this.weapon2Key = key2;
+		this.shootKey = spaceBar;
 	}
 
 	this.init = function(whichGraphic) {
@@ -30,8 +35,10 @@ function shipClass() {
 		this.exhaust = new animatedSprite();
 		this.exhaust.init(shipExhaustPic, 3, 3);
 		this.collisionRadius = SHIP_COLLISION_RADIUS;
-		this.cannon = new cannonClass(1, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS);
-		this.shockwaveGenerator = new shockwaveGeneratorClass(1, SHOCKWAVE_BASE_COOLDOWN, SHOCKWAVE_SPEED, SHOCKWAVE_RANGE, SHOCKWAVE_COLOUR)
+		this.cannon = new cannonClass(1, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
+		this.shockwaveGenerator = new shockwaveGeneratorClass(1, SHOCKWAVE_BASE_COOLDOWN, SHOCKWAVE_SPEED, SHOCKWAVE_RANGE, SHOCKWAVE_COLOUR, playerShockwaves);
+		this.weapons = [this.cannon, this.shockwaveGenerator];
+		this.primaryWeapon = this.weapons[0];
 		this.reset();
 	}
 
@@ -100,30 +107,22 @@ function shipClass() {
 		this.vY *= SPACESPEED_DECAY_MULT;
 	}
 
+	this.selectWeapon = function(weaponIndex) {
+		this.primaryWeapon = this.weapons[weaponIndex];
+	}
+
 	this.fireSelectedWeapon = function() {
-		this.fireShockwaveGenerator();
-	}
-
-	this.fireCannon = function() {
-		if(this.cannon.cooldown == 0) {
-			this.cannon.fire(this, playerShots);
-		}
-	}
-
-	this.fireShockwaveGenerator = function() {
-		if(this.shockwaveGenerator.cooldown == 0) {
-			this.shockwaveGenerator.fire(this, playerShockwaves);
+		if(this.primaryWeapon.cooldown == 0) {
+			this.primaryWeapon.fire(this);
 		}
 	}
 
 	this.decrementCooldowns = function() {
-		this.cannon.cooldown--;
-		if(this.cannon.cooldown < 0) {
-			this.cannon.cooldown = 0;
-		}
-		this.shockwaveGenerator.cooldown--;
-		if(this.shockwaveGenerator.cooldown < 0) {
-			this.shockwaveGenerator.cooldown = 0;
+		for(var i = 0; i < this.weapons.length; i++) {
+			this.weapons[i].cooldown--;
+			if(this.weapons[i].cooldown < 0) {
+				this.weapons[i].cooldown = 0;
+			}
 		}
 	}
 

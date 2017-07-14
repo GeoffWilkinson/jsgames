@@ -29,7 +29,7 @@ function shockwaveClass() {
 
 	this.detectCollisionWithEntity = function(otherEntity, givesScore) {
 		var distanceFromOrigin = distanceBetween(this, otherEntity);
-		if(distanceFromOrigin <= this.radius + otherEntity.collisionRadius && distanceFromOrigin >= this.radius + otherEntity.collisionRadius - this.speed) {
+		if(distanceFromOrigin <= this.radius + otherEntity.collisionRadius) {
 			if(givesScore) {
 				awardScore(otherEntity);
 			}
