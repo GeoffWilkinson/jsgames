@@ -58,7 +58,7 @@ function UFOClass() {
 		this.idleRotation = Math.PI * this.idleRotationDegrees / 180;
 
 		this.aimAt(p1);
-		this.fireSelectedWeapon();
+		this.fireCannon();
 	}
 
 	this.aimAt = function(otherEntity) {
@@ -66,7 +66,7 @@ function UFOClass() {
 		this.ang = Math.atan2(otherEntity.y - this.y, otherEntity.x - this.x);
 	}
 
-	this.fireSelectedWeapon = function() {
+	this.fireCannon = function() {
 		if(this.cannon.cooldown == 0) {
 			this.cannon.fire(this, enemyShots);
 		}

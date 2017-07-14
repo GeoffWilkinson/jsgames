@@ -16,3 +16,21 @@ function cannonClass(damage, cooldown, ammoImage, ammoSpeed, ammoLife, ammoColli
 		this.cooldown = this.baseCooldown;
 	}
 }
+
+function shockwaveGeneratorClass(damage, cooldown, speed, range, colour) {
+	this.damage = damage;
+	this.cooldown = 0;
+	this.baseCooldown = cooldown;
+
+	this.colour = colour;
+	this.speed = speed;
+	this.range = range;
+
+	this.fire = function(fromThis, shockwaveGroup) {
+		var newShockwave = new shockwaveClass();
+		newShockwave.init(this.colour);
+		newShockwave.shootFrom(fromThis, this.speed, this.range);
+		shockwaveGroup.push(newShockwave);
+		this.cooldown = this.baseCooldown;
+	}
+}

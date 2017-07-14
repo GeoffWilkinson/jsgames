@@ -2,8 +2,10 @@
 const SPACESPEED_DECAY_MULT = 0.99;
 const THRUST_POWER = 0.15;
 const TURN_RATE = 0.03;
-const CANNON_BASE_COOLDOWN = 10;
 const SHIP_COLLISION_RADIUS = 20;
+
+const CANNON_BASE_COOLDOWN = 10;
+const SHOCKWAVE_BASE_COOLDOWN = 20;
 
 shipClass.prototype = new movingWrapPositionClass(); 
 
@@ -29,6 +31,7 @@ function shipClass() {
 		this.exhaust.init(shipExhaustPic, 3, 3);
 		this.collisionRadius = SHIP_COLLISION_RADIUS;
 		this.cannon = new cannonClass(1, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS);
+		this.shockwaveGenerator = new shockwaveGeneratorClass(1, SHOCKWAVE_BASE_COOLDOWN, SHOCKWAVE_SPEED, SHOCKWAVE_RANGE, SHOCKWAVE_COLOUR)
 		this.reset();
 	}
 
@@ -98,8 +101,18 @@ function shipClass() {
 	}
 
 	this.fireSelectedWeapon = function() {
+		this.fireShockwaveGenerator();
+	}
+
+	this.fireCannon = function() {
 		if(this.cannon.cooldown == 0) {
 			this.cannon.fire(this, playerShots);
+		}
+	}
+
+	this.fireShockwaveGenerator = function() {
+		if(this.shockwaveGenerator.cooldown == 0) {
+			this.shockwaveGenerator.fire(this, playerShockwaves);
 		}
 	}
 
@@ -107,6 +120,10 @@ function shipClass() {
 		this.cannon.cooldown--;
 		if(this.cannon.cooldown < 0) {
 			this.cannon.cooldown = 0;
+		}
+		this.shockwaveGenerator.cooldown--;
+		if(this.shockwaveGenerator.cooldown < 0) {
+			this.shockwaveGenerator.cooldown = 0;
 		}
 	}
 
@@ -120,8 +137,8 @@ function shipClass() {
 	this.draw = function() {
 		drawBitmapCenteredAtLocationWithRotation(this.myBitmap, this.x, this.y, this.ang);
 		this.exhaust.tickAnimation();
-		var offsetX = Math.cos(this.ang) * (-32);
-		var offsetY = Math.sin(this.ang) * (-32);
+		var offsetX = Math.cos(this.ang) * -32;
+		var offsetY = Math.sin(this.ang) * -32;
 		this.exhaust.draw(this.x + offsetX, this.y + offsetY, this.ang);
 	}
 } // end of class
