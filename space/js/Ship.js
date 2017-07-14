@@ -39,6 +39,7 @@ function shipClass() {
 		this.ang = -0.5 * Math.PI;
 		this.cannonCooldown = 0;
 		totalScore = 0;
+		hitCombo = 1;
 		this.keyHeldFor = 0;
 		this.exhaustSequence = [0, 1, 2];
 		this.exhaust.setAnimationSequence(this.exhaustSequence, "reverse");
