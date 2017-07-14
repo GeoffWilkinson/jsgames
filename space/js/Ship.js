@@ -28,6 +28,7 @@ function shipClass() {
 		this.exhaust = new animatedSprite();
 		this.exhaust.init(shipExhaustPic, 3, 3);
 		this.collisionRadius = SHIP_COLLISION_RADIUS;
+		this.cannon = new cannonClass(1, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS);
 		this.reset();
 	}
 
@@ -95,19 +96,16 @@ function shipClass() {
 		this.vY *= SPACESPEED_DECAY_MULT;
 	}
 
-	this.cannonFire = function() {
-		if(this.cannonCooldown == 0) {
-			var newShot = new shotClass();
-			newShot.init(shotPic, SHOT_COLLISION_RADIUS);
-			newShot.shootFrom(this, SHOT_SPEED, SHOT_LIFE);
-			playerShots.push(newShot);
-			this.cannonCooldown = CANNON_BASE_COOLDOWN;
+	this.fireSelectedWeapon = function() {
+		if(this.cannon.cooldown == 0) {
+			this.cannon.fire(p1);
 		}
 	}
 
 	this.decrementCooldowns = function() {
-		if(this.cannonCooldown > 0) {
-			this.cannonCooldown--;
+		this.cannon.cooldown--;
+		if(this.cannon.cooldown < 0) {
+			this.cannon.cooldown = 0;
 		}
 	}
 

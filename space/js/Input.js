@@ -48,7 +48,7 @@ function mouseReleased(evt) {
 
 function keyPressed(evt) {
 	if(evt.keyCode == KEY_SPACEBAR) {
-		p1.cannonFire();
+		p1.fireSelectedWeapon();
 	}
 	setKeyHoldState(evt.keyCode, p1, true);
 	evt.preventDefault(); // without this, arrow keys scroll the browser!
