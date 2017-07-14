@@ -27,20 +27,11 @@ function shockwaveClass() {
 		this.range = shockwaveRange;
 	}
 
-	this.detectCollisionWithEntity = function(otherEntity) {
+	this.detectCollisionWithEntity = function(otherEntity, givesScore) {
 		var distanceFromOrigin = distanceBetween(this, otherEntity);
 		if(distanceFromOrigin <= this.radius + otherEntity.collisionRadius && distanceFromOrigin >= this.radius + otherEntity.collisionRadius - this.speed) {
-			if(otherEntity != p1) {
-				var scoreGained = calculateHitScore();
-				addScoreToTotal(scoreGained);
-
-				var hitScore = new floatingTextClass();
-				hitScore.init(scoreGained, otherEntity.x, otherEntity.y, 'yellow');
-				allFloatingText.push(hitScore);
-
-				var combo = new floatingTextClass();
-				combo.init(hitCombo + "x combo", p1.x, p1.y, 'yellow');
-				allFloatingText.push(combo);
+			if(givesScore) {
+				awardScore(otherEntity);
 			}
 			otherEntity.isDead = true;
 		}

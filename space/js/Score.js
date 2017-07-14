@@ -23,6 +23,19 @@ function addScoreToTotal(newScore) {
 	highScore = Math.max(highScore, totalScore);
 }
 
+function awardScore(forEntity) {
+	var scoreGained = calculateHitScore();
+	addScoreToTotal(scoreGained);
+
+	var hitScore = new floatingTextClass();
+	hitScore.init(scoreGained, forEntity.x, forEntity.y, 'yellow');
+	allFloatingText.push(hitScore);
+
+	var combo = new floatingTextClass();
+	combo.init(hitCombo + "x combo", p1.x, p1.y, 'yellow');
+	allFloatingText.push(combo);
+}
+
 function drawScore() {
 	colourText("Score: " + totalScore + " High Score: " + highScore, 10, 10, 'yellow');
 }

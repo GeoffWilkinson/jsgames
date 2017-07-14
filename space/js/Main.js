@@ -71,46 +71,46 @@ function handleAllDeadObjects() {
 function checkAllCollisions() {
 	// Player ship collisions
 	for(var i = 0; i < allUFOs.length; i++) {
-		p1.checkCollisionWithEntity(allUFOs[i]);
+		p1.checkCollisionWithEntity(allUFOs[i], false);
 	}
 	for(var i = 0; i < allAsteroids.length; i++) {
-		p1.checkCollisionWithEntity(allAsteroids[i]);
+		p1.checkCollisionWithEntity(allAsteroids[i], false);
 	}
 
 	// Shot collisions
 	for(var i = 0; i < playerShots.length; i++) {
 		for(var j = 0; j < allUFOs.length; j++) {
-			playerShots[i].detectCollisionWithEntity(allUFOs[j]);
+			playerShots[i].detectCollisionWithEntity(allUFOs[j], true);
 		}
 		for(var j = 0; j < allAsteroids.length; j++) {
-			playerShots[i].detectCollisionWithEntity(allAsteroids[j]);
+			playerShots[i].detectCollisionWithEntity(allAsteroids[j], false);
 		}
 	}
 	for(var i = 0; i < enemyShots.length; i++) {
-		enemyShots[i].detectCollisionWithEntity(p1);
+		enemyShots[i].detectCollisionWithEntity(p1, false);
 	}
 
 	// Shockwave collisions
 	for(var i = 0; i < playerShockwaves.length; i++) {
 		for(var j = 0; j < allUFOs.length; j++) {
-			playerShockwaves[i].detectCollisionWithEntity(allUFOs[j]);
+			playerShockwaves[i].detectCollisionWithEntity(allUFOs[j], true);
 		}
 		for(var j = 0; j < allAsteroids.length; j++) {
-			playerShockwaves[i].detectCollisionWithEntity(allAsteroids[j]);
+			playerShockwaves[i].detectCollisionWithEntity(allAsteroids[j], false);
 		}
 		for(var j = 0; j < enemyShots.length; j++) {
-			playerShockwaves[i].detectCollisionWithEntity(enemyShots[j]);
+			playerShockwaves[i].detectCollisionWithEntity(enemyShots[j], false);
 		}
 		for(var j = 0; j < asteroidFragments.length; j++) {
-			playerShockwaves[i].detectCollisionWithEntity(asteroidFragments[j]);
+			playerShockwaves[i].detectCollisionWithEntity(asteroidFragments[j], false);
 		}
 	}
 
 	// Asteroid fragment collisions
 	for(var i = 0; i < asteroidFragments.length; i++) {
-		asteroidFragments[i].detectCollisionWithEntity(p1);
+		asteroidFragments[i].detectCollisionWithEntity(p1, false);
 		for(var j = 0; j < allUFOs.length; j++) {
-			asteroidFragments[i].detectCollisionWithEntity(allUFOs[j]);
+			asteroidFragments[i].detectCollisionWithEntity(allUFOs[j], false);
 		}
 	}
 }
