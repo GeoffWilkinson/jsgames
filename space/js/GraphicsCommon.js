@@ -96,7 +96,7 @@ function animatedSprite() {
 		}
 		this.currentFrame = this.animationFrames[this.sequenceNumber];
 		this.currentHFrame = this.currentFrame % this.hFrames;
-		this.currentVFrame = Math.floor(this.currentFrame / this.vFrames);
+		this.currentVFrame = Math.floor(this.currentFrame / this.hFrames);
 	}
 
 	this.draw = function(atX, atY, withAngle) {
