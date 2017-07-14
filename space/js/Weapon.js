@@ -56,7 +56,7 @@ function missileLauncherClass(damage, cooldown, ammoImage, ammoSpeed, ammoTurnRa
 	this.fire = function(fromThis) {
 		var newMissile = new missileClass();
 		newMissile.init(this.ammoImage, this.ammoCollisionRadius);
-		newMissile.shootFrom(fromThis, this.ammoSpeed, this.ammoLife);
+		newMissile.shootFrom(fromThis, this.ammoSpeed, this.ammoTurnRate, this.ammoLife);
 		this.missileGroup.push(newMissile);
 		this.cooldown = this.baseCooldown;
 	}
