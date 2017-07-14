@@ -19,14 +19,14 @@ function cannonClass(damage, cooldown, ammoImage, ammoSpeed, ammoLife, ammoColli
 	}
 }
 
-function shockwaveGeneratorClass(damage, cooldown, speed, range, colour, shockwaveGroup) {
+function shockwaveGeneratorClass(damage, cooldown, waveSpeed, waveRange, waveColour, shockwaveGroup) {
 	this.damage = damage;
 	this.cooldown = 0;
 	this.baseCooldown = cooldown;
 
-	this.colour = colour;
-	this.speed = speed;
-	this.range = range;
+	this.colour = waveColour;
+	this.speed = waveSpeed;
+	this.range = waveRange;
 
 	this.shockwaveGroup = shockwaveGroup;
 
@@ -35,6 +35,29 @@ function shockwaveGeneratorClass(damage, cooldown, speed, range, colour, shockwa
 		newShockwave.init(this.colour);
 		newShockwave.shootFrom(fromThis, this.speed, this.range);
 		this.shockwaveGroup.push(newShockwave);
+		this.cooldown = this.baseCooldown;
+	}
+}
+
+
+function missileLauncherClass(damage, cooldown, ammoImage, ammoSpeed, ammoTurnRate, ammoLife, ammoCollisionRadius, missileGroup) {
+	this.damage = damage;
+	this.cooldown = 0;
+	this.baseCooldown = cooldown;
+
+	this.ammoImage = ammoImage;
+	this.ammoSpeed = ammoSpeed;
+	this.ammoTurnRate = ammoTurnRate;
+	this.ammoLife = ammoLife;
+	this.ammoCollisionRadius = ammoCollisionRadius;
+
+	this.missileGroup = missileGroup;
+
+	this.fire = function(fromThis) {
+		var newMissile = new missileClass();
+		newMissile.init(this.ammoImage, this.ammoCollisionRadius);
+		newMissile.shootFrom(fromThis, this.ammoSpeed, this.ammoLife);
+		this.missileGroup.push(newMissile);
 		this.cooldown = this.baseCooldown;
 	}
 }

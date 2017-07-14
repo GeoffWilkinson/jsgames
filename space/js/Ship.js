@@ -6,6 +6,7 @@ const SHIP_COLLISION_RADIUS = 20;
 
 const CANNON_BASE_COOLDOWN = 10;
 const SHOCKWAVE_BASE_COOLDOWN = 90;
+const MISSILE_BASE_COOLDOWN = 25;
 
 shipClass.prototype = new movingWrapPositionClass(); 
 
@@ -17,16 +18,20 @@ function shipClass() {
 	this.keyHeld_TurnRight = false;
 	this.keyHeld_Weapon1 = false;
 	this.keyHeld_Weapon2 = false;
+	this.keyHeld_Weapon3 = false;
+	this.keyHeld_Weapon4 = false;
 	this.keyHeld_Shoot = false;
 
 	// key controls used for this 
-	this.setupControls = function(forwardKey, backKey, leftKey, rightKey, key1, key2, spaceBar) {
+	this.setupControls = function(forwardKey, backKey, leftKey, rightKey, key1, key2, key3, key4, spaceBar) {
 		this.controlKeyForGas = forwardKey;
 		this.controlKeyForReverse = backKey;
 		this.controlKeyForTurnLeft = leftKey;
 		this.controlKeyForTurnRight = rightKey;
 		this.weapon1Key = key1;
 		this.weapon2Key = key2;
+		this.weapon3Key = key3;
+		this.weapon4Key = key4;
 		this.shootKey = spaceBar;
 	}
 
@@ -37,7 +42,9 @@ function shipClass() {
 		this.collisionRadius = SHIP_COLLISION_RADIUS;
 		this.cannon = new cannonClass(1, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
 		this.shockwaveGenerator = new shockwaveGeneratorClass(1, SHOCKWAVE_BASE_COOLDOWN, SHOCKWAVE_SPEED, SHOCKWAVE_RANGE, SHOCKWAVE_COLOUR, playerShockwaves);
-		this.weapons = [this.cannon, this.shockwaveGenerator];
+		this.missileLauncher = new missileLauncherClass(1, MISSILE_BASE_COOLDOWN, shotPic, MISSILE_THRUST, MISSILE_TURN_RATE, MISSILE_LIFE, MISSILE_COLLISION_RADIUS, playerMissiles);
+		this.beamWeapon = new cannonClass(1, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
+		this.weapons = [this.cannon, this.shockwaveGenerator, this.missileLauncher, this.beamWeapon];
 		this.primaryWeapon = this.weapons[0];
 		this.reset();
 	}

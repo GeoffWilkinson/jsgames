@@ -13,10 +13,12 @@ const KEY_SPACEBAR = 32;
 
 const KEY_1 = 49;
 const KEY_2 = 50;
+const KEY_3 = 51;
+const KEY_4 = 52;
 
 function initInput() {
 	enableInput();
-	p1.setupControls(KEY_LETTER_W, KEY_LETTER_S, KEY_LETTER_A, KEY_LETTER_D, KEY_1, KEY_2, KEY_SPACEBAR);
+	p1.setupControls(KEY_LETTER_W, KEY_LETTER_S, KEY_LETTER_A, KEY_LETTER_D, KEY_1, KEY_2, KEY_3, KEY_4, KEY_SPACEBAR);
 }
 
 function setKeyHoldState(thisKey, thisShip, setTo) {
@@ -39,6 +41,12 @@ function setKeyHoldState(thisKey, thisShip, setTo) {
 	} else if(thisKey == thisShip.weapon2Key) {
 		thisShip.keyHeld_Weapon2 = setTo;
 		p1.selectWeapon(1);
+	} else if(thisKey == thisShip.weapon3Key) {
+		thisShip.keyHeld_Weapon3 = setTo;
+		p1.selectWeapon(2);
+	} else if(thisKey == thisShip.weapon4Key) {
+		thisShip.keyHeld_Weapon4 = setTo;
+		p1.selectWeapon(3);
 	}
 
 	if(thisKey == thisShip.shootKey) {
