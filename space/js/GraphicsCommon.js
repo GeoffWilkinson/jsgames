@@ -14,6 +14,15 @@ function drawBitmapCenteredWithRotation(graphic, atX, atY, withAngle) {
 	canvasContext.restore(); // undo the translation movement and rotation since save()
 }
 
+function colourLine(startX, startY, endX, endY, strokeColour, lineThickness) {
+	canvasContext.strokeStyle = strokeColour;
+	canvasContext.lineWidth = lineThickness;
+	canvasContext.beginPath();
+	canvasContext.moveTo(startX, startY);
+	canvasContext.lineTo(endX, endY);
+	canvasContext.stroke();
+}
+
 function colourRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColour) {
 	canvasContext.fillStyle = fillColour;
 	canvasContext.fillRect(topLeftX, topLeftY, boxWidth, boxHeight);
