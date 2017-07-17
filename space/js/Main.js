@@ -51,6 +51,7 @@ function handleAllDeadObjects() {
 	removeDeadObjects(playerShots);
 	removeDeadObjects(playerShockwaves);
 	removeDeadObjects(playerMissiles);
+	removeDeadObjects(playerBeams);
 	removeDeadObjects(enemyShots);
 	removeDeadObjects(asteroidFragments);
 	removeDeadObjects(allFloatingText);
@@ -139,6 +140,38 @@ function checkAllCollisions() {
 		}
 		for(var j = 0; j < asteroidFragments.length; j++) {
 			playerShockwaves[i].detectCollisionWithEntity(asteroidFragments[j], false);
+		}
+	}
+
+	// Beam pre-collisions
+	for(var i = 0; i < playerBeams.length; i++) {
+		for(var j = 0; j < allUFOs.length; j++) {
+			playerBeams[i].markEntityForDeath(allUFOs[j]);
+		}
+		for(var j = 0; j < allAsteroids.length; j++) {
+			playerBeams[i].markEntityForDeath(allAsteroids[j]);
+		}
+		for(var j = 0; j < enemyShots.length; j++) {
+			playerBeams[i].markEntityForDeath(enemyShots[j]);
+		}
+		for(var j = 0; j < asteroidFragments.length; j++) {
+			playerBeams[i].markEntityForDeath(asteroidFragments[j]);
+		}
+	}
+
+	// Beam collisions
+	for(var i = 0; i < playerBeams.length; i++) {
+		for(var j = 0; j < allUFOs.length; j++) {
+			playerBeams[i].detectCollisionWithEntity(allUFOs[j], true);
+		}
+		for(var j = 0; j < allAsteroids.length; j++) {
+			playerBeams[i].detectCollisionWithEntity(allAsteroids[j], false);
+		}
+		for(var j = 0; j < enemyShots.length; j++) {
+			playerBeams[i].detectCollisionWithEntity(enemyShots[j], false);
+		}
+		for(var j = 0; j < asteroidFragments.length; j++) {
+			playerBeams[i].detectCollisionWithEntity(asteroidFragments[j], false);
 		}
 	}
 
@@ -239,6 +272,7 @@ function moveInGame() {
 	moveAllGroupEntities(playerShots);
 	moveAllGroupEntities(playerShockwaves);
 	moveAllGroupEntities(playerMissiles);
+	moveAllGroupEntities(playerBeams);
 	moveAllGroupEntities(enemyShots);
 	moveAllGroupEntities(asteroidFragments);
 
@@ -254,6 +288,7 @@ function drawInGame() {
 	drawAllGroupEntities(playerShots);
 	drawAllGroupEntities(playerShockwaves);
 	drawAllGroupEntities(playerMissiles);
+	drawAllGroupEntities(playerBeams);
 	drawAllGroupEntities(enemyShots);
 	drawAllGroupEntities(asteroidFragments);
 

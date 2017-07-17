@@ -7,6 +7,7 @@ const SHIP_COLLISION_RADIUS = 20;
 const CANNON_BASE_COOLDOWN = 10;
 const SHOCKWAVE_BASE_COOLDOWN = 90;
 const MISSILE_BASE_COOLDOWN = 25;
+const BEAMCANNON_BASE_COOLDOWN = 120;
 
 shipClass.prototype = new movingWrapPositionClass(); 
 
@@ -40,10 +41,10 @@ function shipClass() {
 		this.exhaust = new animatedSprite();
 		this.exhaust.init(shipExhaustPic, 3, 3);
 		this.collisionRadius = SHIP_COLLISION_RADIUS;
-		this.cannon = new cannonClass(1, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
+		this.cannon = new pulseCannonClass(1, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
 		this.shockwaveGenerator = new shockwaveGeneratorClass(1, SHOCKWAVE_BASE_COOLDOWN, SHOCKWAVE_SPEED, SHOCKWAVE_RANGE, SHOCKWAVE_COLOUR, playerShockwaves);
 		this.missileLauncher = new missileLauncherClass(1, MISSILE_BASE_COOLDOWN, missilePic, MISSILE_THRUST, MISSILE_TURN_RATE, MISSILE_LIFE, MISSILE_COLLISION_RADIUS, playerMissiles);
-		this.beamWeapon = new cannonClass(1, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
+		this.beamWeapon = new beamCannonClass(1, BEAMCANNON_BASE_COOLDOWN, BEAM_COLOUR, BEAM_RANGE, BEAM_LIFE, BEAM_WIDTH, playerBeams);
 		this.weapons = [this.cannon, this.shockwaveGenerator, this.missileLauncher, this.beamWeapon];
 		this.primaryWeapon = this.weapons[0];
 		this.reset();

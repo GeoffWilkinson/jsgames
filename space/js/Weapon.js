@@ -1,4 +1,4 @@
-function cannonClass(damage, cooldown, ammoImage, ammoSpeed, ammoLife, ammoCollisionRadius, shotGroup) {
+function pulseCannonClass(damage, cooldown, ammoImage, ammoSpeed, ammoLife, ammoCollisionRadius, shotGroup) {
 	this.damage = damage;
 	this.cooldown = 0;
 	this.baseCooldown = cooldown;
@@ -24,21 +24,20 @@ function shockwaveGeneratorClass(damage, cooldown, waveSpeed, waveRange, waveCol
 	this.cooldown = 0;
 	this.baseCooldown = cooldown;
 
-	this.colour = waveColour;
-	this.speed = waveSpeed;
-	this.range = waveRange;
+	this.waveColour = waveColour;
+	this.waveSpeed = waveSpeed;
+	this.waveRange = waveRange;
 
 	this.shockwaveGroup = shockwaveGroup;
 
 	this.fire = function(fromThis) {
 		var newShockwave = new shockwaveClass();
-		newShockwave.init(this.colour);
-		newShockwave.shootFrom(fromThis, this.speed, this.range);
+		newShockwave.init(this.waveColour);
+		newShockwave.shootFrom(fromThis, this.waveSpeed, this.waveRange);
 		this.shockwaveGroup.push(newShockwave);
 		this.cooldown = this.baseCooldown;
 	}
 }
-
 
 function missileLauncherClass(damage, cooldown, ammoImage, ammoSpeed, ammoTurnRate, ammoLife, ammoCollisionRadius, missileGroup) {
 	this.damage = damage;
@@ -58,6 +57,27 @@ function missileLauncherClass(damage, cooldown, ammoImage, ammoSpeed, ammoTurnRa
 		newMissile.init(this.ammoImage, this.ammoCollisionRadius);
 		newMissile.shootFrom(fromThis, this.ammoSpeed, this.ammoTurnRate, this.ammoLife);
 		this.missileGroup.push(newMissile);
+		this.cooldown = this.baseCooldown;
+	}
+}
+
+function beamCannonClass(damage, cooldown, beamColour, beamRange, beamLife, beamWidth, beamGroup) {
+	this.damage = damage;
+	this.cooldown = 0;
+	this.baseCooldown = cooldown;
+
+	this.beamColour = beamColour;
+	this.beamRange = beamRange;
+	this.beamLife = beamLife;
+	this.beamWidth = beamWidth;
+
+	this.beamGroup = beamGroup;
+
+	this.fire = function(fromThis) {
+		var newBeam = new beamClass();
+		newBeam.init(this.beamColour);
+		newBeam.shootFrom(fromThis, this.beamWidth, this.beamRange, this.beamLife);
+		this.beamGroup.push(newBeam);
 		this.cooldown = this.baseCooldown;
 	}
 }

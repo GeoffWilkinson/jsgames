@@ -12,6 +12,13 @@ function shockwaveClass() {
 	}
 
 	this.move = function() {
+		if(origin.isDead) {
+			this.isDead = true;
+		}
+
+		this.x = this.origin.x;
+		this.y = this.origin.y;
+
 		if(this.radius < this.range) {
 			this.radius += this.speed;
 		} else {
@@ -20,8 +27,9 @@ function shockwaveClass() {
 	}
 
 	this.shootFrom = function(shipFiring, shockwaveSpeed, shockwaveRange) {
-		this.x = shipFiring.x;
-		this.y = shipFiring.y;
+		this.origin = shipFiring
+		this.x = this.origin.x;
+		this.y = this.origin.y;
 		this.speed = shockwaveSpeed;
 
 		this.range = shockwaveRange;
