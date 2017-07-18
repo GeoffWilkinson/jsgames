@@ -40,13 +40,19 @@ function shipClass() {
 		this.myBitmap = whichGraphic;
 		this.exhaust = new animatedSprite();
 		this.exhaust.init(shipExhaustPic, 3, 3);
+
 		this.collisionRadius = SHIP_COLLISION_RADIUS;
+		this.maxhp = 100;
+		this.hp = this.maxhp;
+
 		this.cannon = new pulseCannonClass(1, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
 		this.shockwaveGenerator = new shockwaveGeneratorClass(1, SHOCKWAVE_BASE_COOLDOWN, SHOCKWAVE_SPEED, SHOCKWAVE_RANGE, SHOCKWAVE_COLOUR, playerShockwaves);
 		this.missileLauncher = new missileLauncherClass(1, MISSILE_BASE_COOLDOWN, missilePic, MISSILE_THRUST, MISSILE_TURN_RATE, MISSILE_LIFE, MISSILE_COLLISION_RADIUS, playerMissiles);
 		this.beamWeapon = new beamCannonClass(1, BEAMCANNON_BASE_COOLDOWN, BEAM_COLOUR, BEAM_RANGE, BEAM_LIFE, BEAM_WIDTH, playerBeams);
+
 		this.weapons = [this.cannon, this.shockwaveGenerator, this.missileLauncher, this.beamWeapon];
 		this.primaryWeapon = this.weapons[0];
+
 		this.reset();
 	}
 

@@ -30,7 +30,7 @@ function shotClass() {
 		}
 	}
 
-	this.shootFrom = function(shipFiring, shotSpeed, shotLife) {
+	this.shootFrom = function(shipFiring, shotSpeed, shotLife, shotDamage) {
 		this.x = shipFiring.x;
 		this.y = shipFiring.y;
 		this.ang = shipFiring.ang;
@@ -39,6 +39,7 @@ function shotClass() {
 		this.vY = Math.sin(shipFiring.ang) * shotSpeed + shipFiring.vY;
 
 		this.shotLife = shotLife;
+		this.damage = shotDamage;
 	}
 
 	this.detectCollisionWithEntity = function(otherEntity, givesScore) {

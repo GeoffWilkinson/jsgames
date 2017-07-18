@@ -12,7 +12,11 @@ function asteroidClass() {
 		this.myBitmap = whichGraphic;
 		this.idleRotationDegrees = 0;
 		this.idleRotation = 0;
+
 		this.collisionRadius = ASTEROID_COLLISION_RADIUS;
+		this.maxhp = 200;
+		this.hp = this.maxhp;
+
 		this.reset();
 	}
 

@@ -78,7 +78,7 @@ function missileClass() {
 		}
 	}
 
-	this.shootFrom = function(shipFiring, missileThrust, missileTurnRate, missileLife) {
+	this.shootFrom = function(shipFiring, missileThrust, missileTurnRate, missileLife, missileDamage) {
 		this.x = shipFiring.x;
 		this.y = shipFiring.y;
 
@@ -90,6 +90,7 @@ function missileClass() {
 		this.vY = Math.sin(this.ang);
 
 		this.missileLife = missileLife;
+		this.missileDamage = missileDamage;
 		this.selectTarget(shipFiring);
 	}
 

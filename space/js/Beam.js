@@ -34,7 +34,7 @@ function beamClass() {
 		this.endY = this.y + Math.sin(this.ang) * this.maxRange;
 	}
 
-	this.shootFrom = function(shipFiring, beamWidth, beamRange, beamLife) {
+	this.shootFrom = function(shipFiring, beamWidth, beamRange, beamLife, beamDamage) {
 		this.origin = shipFiring;
 		this.x = this.origin.x;
 		this.y = this.origin.y;
@@ -42,6 +42,7 @@ function beamClass() {
 
 		this.maxRange = beamRange;
 		this.beamLife = beamLife;
+		this.beamDamage = beamDamage;
 
 		this.beamWidth = beamWidth;
 

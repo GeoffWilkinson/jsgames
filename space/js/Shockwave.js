@@ -19,20 +19,21 @@ function shockwaveClass() {
 		this.x = this.origin.x;
 		this.y = this.origin.y;
 
-		if(this.radius < this.range) {
-			this.radius += this.speed;
+		if(this.radius < this.shockwaveRange) {
+			this.radius += this.shockwaveSpeed;
 		} else {
 			this.isDead = true;
 		}
 	}
 
-	this.shootFrom = function(shipFiring, shockwaveSpeed, shockwaveRange) {
+	this.shootFrom = function(shipFiring, shockwaveSpeed, shockwaveRange, shockwaveDamage) {
 		this.origin = shipFiring
 		this.x = this.origin.x;
 		this.y = this.origin.y;
-		this.speed = shockwaveSpeed;
+		this.shockwaveSpeed = shockwaveSpeed;
 
-		this.range = shockwaveRange;
+		this.shockwaveRange = shockwaveRange;
+		this.shockwaveDamage = shockwaveDamage;
 	}
 
 	this.detectCollisionWithEntity = function(otherEntity, givesScore) {

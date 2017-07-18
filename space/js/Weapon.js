@@ -13,7 +13,7 @@ function pulseCannonClass(damage, cooldown, ammoImage, ammoSpeed, ammoLife, ammo
 	this.fire = function(fromThis) {
 		var newShot = new shotClass();
 		newShot.init(this.ammoImage, this.ammoCollisionRadius);
-		newShot.shootFrom(fromThis, this.ammoSpeed, this.ammoLife);
+		newShot.shootFrom(fromThis, this.ammoSpeed, this.ammoLife, this.damage);
 		this.shotGroup.push(newShot);
 		this.cooldown = this.baseCooldown;
 	}
@@ -33,7 +33,7 @@ function shockwaveGeneratorClass(damage, cooldown, waveSpeed, waveRange, waveCol
 	this.fire = function(fromThis) {
 		var newShockwave = new shockwaveClass();
 		newShockwave.init(this.waveColour);
-		newShockwave.shootFrom(fromThis, this.waveSpeed, this.waveRange);
+		newShockwave.shootFrom(fromThis, this.waveSpeed, this.waveRange, this.damage);
 		this.shockwaveGroup.push(newShockwave);
 		this.cooldown = this.baseCooldown;
 	}
@@ -55,7 +55,7 @@ function missileLauncherClass(damage, cooldown, ammoImage, ammoSpeed, ammoTurnRa
 	this.fire = function(fromThis) {
 		var newMissile = new missileClass();
 		newMissile.init(this.ammoImage, this.ammoCollisionRadius);
-		newMissile.shootFrom(fromThis, this.ammoSpeed, this.ammoTurnRate, this.ammoLife);
+		newMissile.shootFrom(fromThis, this.ammoSpeed, this.ammoTurnRate, this.ammoLife, this.damage);
 		this.missileGroup.push(newMissile);
 		this.cooldown = this.baseCooldown;
 	}
@@ -76,7 +76,7 @@ function beamCannonClass(damage, cooldown, beamColour, beamRange, beamLife, beam
 	this.fire = function(fromThis) {
 		var newBeam = new beamClass();
 		newBeam.init(this.beamColour);
-		newBeam.shootFrom(fromThis, this.beamWidth, this.beamRange, this.beamLife);
+		newBeam.shootFrom(fromThis, this.beamWidth, this.beamRange, this.beamLife, this.damage);
 		this.beamGroup.push(newBeam);
 		this.cooldown = this.baseCooldown;
 	}
