@@ -40,6 +40,10 @@ function powerupClass() {
 		} else if(this.powerupType == 1) {
 
 		} else if(this.powerupType == 2) {
+			var healingDone = new floatingTextClass();
+			healingDone.init("SPEED UP!", finder.x, finder.y, 'orange');
+			allFloatingText.push(healingDone);
+
 			finder.thrustMultiplier = 1.5;
 			finder.thrustMultiplierDuration = 200;
 		} else if(this.powerupType == 3) {
