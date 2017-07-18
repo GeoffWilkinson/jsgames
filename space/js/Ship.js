@@ -41,19 +41,17 @@ function shipClass() {
 		this.shootKey = spaceBar;
 	}
 
+	this.superclassInit = this.init;
+
 	this.init = function(whichGraphic) {
+		this.superclassInit();
 		this.myBitmap = whichGraphic;
 		this.exhaust = new animatedSprite();
 		this.exhaust.init(shipExhaustPic, 3, 3);
 
 		this.baseCollisionRadius = SHIP_COLLISION_RADIUS;
 		this.collisionRadius = this.baseCollisionRadius;
-		this.mass = 1;
-
-		this.maxhp = 100;
-		this.hp = this.maxhp;
-		this.shieldmaxhp = 50;
-		this.shieldhp = 0;
+		this.mass = 10;
 
 		this.thrustMultiplier = 1;
 		this.thrustMultiplierDuration = 0;
@@ -75,6 +73,12 @@ function shipClass() {
 
 	this.reset = function() {
 		this.superclassReset();
+
+		this.maxhp = 100;
+		this.hp = this.maxhp;
+		this.shieldmaxhp = 50;
+		this.shieldhp = 0;
+
 		this.ang = -0.5 * Math.PI;
 		this.cannonCooldown = 0;
 		totalScore = 0;
@@ -146,7 +150,6 @@ function shipClass() {
 			this.damageMultiplier = 1;
 		}
 		if(this.shieldhp <= 0) {
-			this.shieldhp = 0;
 			this.collisionRadius = this.baseCollisionRadius;
 		}
 	}

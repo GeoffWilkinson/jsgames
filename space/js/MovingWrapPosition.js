@@ -1,4 +1,11 @@
 function movingWrapPositionClass() {
+	this.init = function() {
+		this.maxhp = 0;
+		this.maxshieldhp = 0;
+		this.hp = 0;
+		this.shieldhp = 0;
+	}
+
 	this.reset = function() {
 		this.vX = 0;
 		this.vY = 0;

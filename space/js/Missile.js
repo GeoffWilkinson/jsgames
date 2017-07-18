@@ -9,7 +9,10 @@ var playerMissiles = [];
 missileClass.prototype = new movingWrapPositionClass();
 
 function missileClass() {
+	this.superclassInit = this.init;
+
 	this.init = function(whichGraphic, collisionRadius) {
+		this.superclassInit();
 		this.myBitmap = whichGraphic;
 		this.exhaust = new animatedSprite();
 		this.exhaust.init(missileExhaustPic, 3, 1);

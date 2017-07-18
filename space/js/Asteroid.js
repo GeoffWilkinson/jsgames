@@ -10,15 +10,13 @@ const ASTEROID_FRAGMENT_DAMAGE = 20;
 asteroidClass.prototype = new movingWrapPositionClass();
 
 function asteroidClass() {
+	this.superclassInit = this.init;
+
 	this.init = function(whichGraphic) {
+		this.superclassInit();
 		this.myBitmap = whichGraphic;
 		this.idleRotationDegrees = 0;
 		this.idleRotation = 0;
-
-		this.collisionRadius = ASTEROID_COLLISION_RADIUS;
-		this.maxhp = 120;
-		this.hp = this.maxhp;
-		this.mass = 5;
 
 		this.reset();
 	}
@@ -27,8 +25,13 @@ function asteroidClass() {
 
 	this.reset = function() {
 		this.superclassReset();
-		this.ang = -0.5 * Math.PI;
 
+		this.collisionRadius = ASTEROID_COLLISION_RADIUS;
+		this.maxhp = 120;
+		this.hp = this.maxhp;
+		this.mass = 50;
+
+		this.ang = -0.5 * Math.PI;
 		this.x = Math.random() * canvas.width;
 		this.y = Math.random() * canvas.height;
 

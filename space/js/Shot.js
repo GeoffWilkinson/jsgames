@@ -13,7 +13,10 @@ var asteroidFragments = [];
 shotClass.prototype = new movingWrapPositionClass();
 
 function shotClass() {
+	this.superclassInit = this.init;
+
 	this.init = function(whichGraphic, collisionRadius) {
+		this.superclassInit();
 		this.myBitmap = whichGraphic;
 
 		this.collisionRadius = collisionRadius;

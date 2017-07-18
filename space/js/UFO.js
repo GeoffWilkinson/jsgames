@@ -12,15 +12,13 @@ const UFO_CANNON_BASE_DAMAGE = 10;
 UFOClass.prototype = new movingWrapPositionClass();
 
 function UFOClass() {
+	this.superclassInit = this.init;
+
 	this.init = function(whichGraphic) {
+		this.superclassInit();
 		this.myBitmap = whichGraphic;
 		this.idleRotationDegrees = 0;
 		this.idleRotation = 0;
-
-		this.collisionRadius = UFO_COLLISION_RADIUS;
-		this.maxhp = 20;
-		this.hp = this.maxhp;
-		this.mass = 0.8;
 
 		this.cannon = new pulseCannonClass(UFO_CANNON_BASE_DAMAGE, UFO_CANNON_BASE_COOLDOWN, UFOShotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, enemyShots);
 		this.reset();
@@ -30,6 +28,12 @@ function UFOClass() {
 
 	this.reset = function() {
 		this.superclassReset();
+
+		this.collisionRadius = UFO_COLLISION_RADIUS;
+		this.maxhp = 20;
+		this.hp = this.maxhp;
+		this.mass = 8;
+
 		this.ang = -0.5 * Math.PI;
 		this.x = Math.random() * canvas.width;
 		this.y = Math.random() * canvas.height;
@@ -47,8 +51,9 @@ function UFOClass() {
 		this.cyclesTilDirectionChange--;
 		if(this.cyclesTilDirectionChange < 0) {
 			var randAng = Math.random() * Math.PI * 2;
-			this.vX = Math.cos(randAng) * UFO_SPEED;
-			this.vY = Math.sin(randAng) * UFO_SPEED;
+			this.ang = randAng;
+			this.vX = Math.cos(this.ang) * UFO_SPEED;
+			this.vY = Math.sin(this.ang) * UFO_SPEED;
 			this.cyclesTilDirectionChange = UFO_TIME_BETWEEN_CHANGE_DIR;
 		}
 
