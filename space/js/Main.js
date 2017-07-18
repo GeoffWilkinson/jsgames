@@ -6,6 +6,10 @@
 // 4. spawn exclusion zone around player for asteroids and UFOs
 // 5. game over screen when player dies
 // 6. stats page upon game over (therefore stat tracking in game)
+// 7. ship inventory with equipable items
+// 8. post-level ship configuration
+// 9. temporary stat boost drops
+// 10. entity properties more complex, e.g. damage/hp
 
 // save the canvas for dimensions, and its 2d context for drawing to it
 var canvas;
