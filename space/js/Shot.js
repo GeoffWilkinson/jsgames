@@ -15,7 +15,11 @@ shotClass.prototype = new movingWrapPositionClass();
 function shotClass() {
 	this.init = function(whichGraphic, collisionRadius) {
 		this.myBitmap = whichGraphic;
+
 		this.collisionRadius = collisionRadius;
+		this.maxhp = 1;
+		this.hp = this.maxhp;
+
 		this.isDead = false;
 	}
 
@@ -39,15 +43,19 @@ function shotClass() {
 		this.vY = Math.sin(shipFiring.ang) * shotSpeed + shipFiring.vY;
 
 		this.shotLife = shotLife;
-		this.damage = shotDamage;
+		this.shotDamage = shotDamage;
 	}
 
 	this.detectCollisionWithEntity = function(otherEntity, givesScore) {
 		if(distanceBetween(this, otherEntity) <= this.collisionRadius + otherEntity.collisionRadius) {
-			if(givesScore) {
-				awardScore(otherEntity);
+			otherEntity.hp -= this.shotDamage;
+			if(otherEntity.hp <= 0) {
+				otherEntity.hp = 0;
+				if(givesScore) {
+					awardScore(otherEntity);
+				}
+				otherEntity.isDead = true;
 			}
-			otherEntity.isDead = true;
 			this.isDead = true;
 		}
 	}

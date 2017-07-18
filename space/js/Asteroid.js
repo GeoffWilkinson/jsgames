@@ -5,6 +5,8 @@ const FRAGMENTATION_AMOUNT = 8;
 const NUM_ASTEROIDS = 2;
 var allAsteroids = [];
 
+const ASTEROID_FRAGMENT_DAMAGE = 20;
+
 asteroidClass.prototype = new movingWrapPositionClass();
 
 function asteroidClass() {
@@ -14,7 +16,7 @@ function asteroidClass() {
 		this.idleRotation = 0;
 
 		this.collisionRadius = ASTEROID_COLLISION_RADIUS;
-		this.maxhp = 200;
+		this.maxhp = 120;
 		this.hp = this.maxhp;
 
 		this.reset();
@@ -58,7 +60,7 @@ function asteroidClass() {
 			this.ang += 2 * Math.PI / FRAGMENTATION_AMOUNT;
 			var newShot = new shotClass();
 			newShot.init(rockFragmentPic, FRAGMENT_COLLISION_RADIUS);
-			newShot.shootFrom(this, FRAGMENT_SPEED, FRAGMENT_LIFE);
+			newShot.shootFrom(this, FRAGMENT_SPEED, FRAGMENT_LIFE, ASTEROID_FRAGMENT_DAMAGE);
 			asteroidFragments.push(newShot);
 			// reset the centre of the asteroid so we draw it properly
 			this.x = origX;

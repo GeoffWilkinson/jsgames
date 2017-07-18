@@ -52,10 +52,14 @@ function beamClass() {
 
 	this.detectCollisionWithEntity = function(otherEntity, givesScore) {
 		if(otherEntity == this.markedEntity) {
-			if(givesScore) {
-				awardScore(otherEntity);
+			otherEntity.hp -= this.beamDamage;
+			if(otherEntity.hp <= 0) {
+				otherEntity.hp = 0;
+				if(givesScore) {
+					awardScore(otherEntity);
+				}
+				otherEntity.isDead = true;
 			}
-			otherEntity.isDead = true;
 			this.markedEntity = undefined;
 			this.rangeToMarkedEntity = undefined;
 		}
