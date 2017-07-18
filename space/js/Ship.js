@@ -46,14 +46,19 @@ function shipClass() {
 		this.exhaust = new animatedSprite();
 		this.exhaust.init(shipExhaustPic, 3, 3);
 
-		this.collisionRadius = SHIP_COLLISION_RADIUS;
+		this.baseCollisionRadius = SHIP_COLLISION_RADIUS;
+		this.collisionRadius = this.baseCollisionRadius;
+		this.mass = 1;
+
 		this.maxhp = 100;
 		this.hp = this.maxhp;
+		this.shieldmaxhp = 50;
+		this.shieldhp = 0;
+
 		this.thrustMultiplier = 1;
 		this.thrustMultiplierDuration = 0;
-		this.damageMultiplier = 1.5;
-		this.damageMultiplierDuration = 200;
-		this.mass = 1;
+		this.damageMultiplier = 1;
+		this.damageMultiplierDuration = 0;
 
 		this.cannon = new pulseCannonClass(CANNON_BASE_DAMAGE, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
 		this.shockwaveGenerator = new shockwaveGeneratorClass(SHOCKWAVE_BASE_DAMAGE, SHOCKWAVE_BASE_COOLDOWN, SHOCKWAVE_SPEED, SHOCKWAVE_RANGE, SHOCKWAVE_COLOUR, playerShockwaves);
@@ -132,11 +137,17 @@ function shipClass() {
 
 		this.thrustMultiplierDuration--;
 		if(this.thrustMultiplierDuration < 0) {
+			this.thrustMultiplierDuration = 0;
 			this.thrustMultiplier = 1;
 		}
 		this.damageMultiplierDuration--;
 		if(this.damageMultiplierDuration < 0) {
+			this.damageMultiplierDuration = 0;
 			this.damageMultiplier = 1;
+		}
+		if(this.shieldhp <= 0) {
+			this.shieldhp = 0;
+			this.collisionRadius = this.baseCollisionRadius;
 		}
 	}
 

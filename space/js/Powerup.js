@@ -39,20 +39,25 @@ function powerupClass() {
 
 			finder.hp = finder.maxhp;
 		} else if(this.powerupType == 1) {
+			var powerupText = new floatingTextClass();
+			powerupText.init("SHIELD UP!", finder.x, finder.y, 'cyan');
+			allFloatingText.push(powerupText);
 
+			finder.shieldhp = finder.shieldmaxhp;
+			finder.collisionRadius = finder.baseCollisionRadius * 2;
 		} else if(this.powerupType == 2) {
 			var powerupText = new floatingTextClass();
 			powerupText.init("SPEED UP!", finder.x, finder.y, 'orange');
 			allFloatingText.push(powerupText);
 
-			finder.thrustMultiplier += 1.5;
+			finder.thrustMultiplier = 1.5;
 			finder.thrustMultiplierDuration += POWERUP_DURATION;
 		} else if(this.powerupType == 3) {
 			var powerupText = new floatingTextClass();
 			powerupText.init("DAMAGE UP!", finder.x, finder.y, 'red');
 			allFloatingText.push(powerupText);
 
-			finder.damageMultiplier += 1.5;
+			finder.damageMultiplier = 1.5;
 			finder.damageMultiplierDuration += POWERUP_DURATION;
 		}
 		this.isDead = true;
