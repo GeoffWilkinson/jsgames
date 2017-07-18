@@ -51,18 +51,12 @@ function shotClass() {
 
 	this.detectCollisionWithEntity = function(otherEntity, givesScore) {
 		if(distanceBetween(this, otherEntity) <= this.collisionRadius + otherEntity.collisionRadius) {
-			otherEntity.hp -= this.shotDamage;
+			otherEntity.takeDamage(this.shotDamage);
 
-			var damageDone = new floatingTextClass();
-			damageDone.init(this.shotDamage, otherEntity.x, otherEntity.y, 'red');
-			allFloatingText.push(damageDone);
-
-			if(otherEntity.hp <= 0) {
-				otherEntity.hp = 0;
+			if(otherEntity.isDead) {
 				if(givesScore) {
 					awardScore(otherEntity);
 				}
-				otherEntity.isDead = true;
 			}
 			this.isDead = true;
 		}

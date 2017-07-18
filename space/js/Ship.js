@@ -177,27 +177,18 @@ function shipClass() {
 		if(distanceBetween(this, otherEntity) <= this.collisionRadius + otherEntity.collisionRadius) {
 			this.handleElasticObjectCollision(otherEntity);
 
-			this.hp -= 10;
-			var damageDone = new floatingTextClass();
-			damageDone.init(10, this.x, this.y, 'red');
-			allFloatingText.push(damageDone);
-			if(this.hp <= 0) {
-				this.isDead = true;
-			}
-
-			otherEntity.hp -= 10;
-			var damageDone = new floatingTextClass();
-			damageDone.init(10, otherEntity.x, otherEntity.y, 'red');
-			allFloatingText.push(damageDone);
-			if(otherEntity.hp <= 0) {
-				otherEntity.isDead = true;
-			}
-
-			document.getElementById("debugText").innerHTML = "Player Crashed!";
+			this.takeDamage(10);
+			otherEntity.takeDamage(10);
 		}
 	}
 
 	this.draw = function() {
+		if(this.shieldhp > 0) {
+			canvasContext.save();
+			canvasContext.globalAlpha = 0.4;
+			colourCircle(this.x, this.y, this.collisionRadius, 'cyan');
+			canvasContext.restore();
+		}
 		drawBitmapCenteredAtLocationWithRotation(this.myBitmap, this.x, this.y, this.ang);
 		this.exhaust.tickAnimation();
 		var offsetX = Math.cos(this.ang) * -32;

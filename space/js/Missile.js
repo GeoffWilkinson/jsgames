@@ -103,18 +103,12 @@ function missileClass() {
 
 	this.detectCollisionWithEntity = function(otherEntity, givesScore) {
 		if(distanceBetween(this, otherEntity) <= this.collisionRadius + otherEntity.collisionRadius) {
-			otherEntity.hp -= this.missileDamage;
+			otherEntity.takeDamage(this.missileDamage);
 
-			var damageDone = new floatingTextClass();
-			damageDone.init(this.missileDamage, otherEntity.x, otherEntity.y, 'red');
-			allFloatingText.push(damageDone);
-
-			if(otherEntity.hp <= 0) {
-				otherEntity.hp = 0;
+			if(otherEntity.isDead) {
 				if(givesScore) {
 					awardScore(otherEntity);
 				}
-				otherEntity.isDead = true;
 			}
 			this.isDead = true;
 		}

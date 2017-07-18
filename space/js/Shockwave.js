@@ -39,18 +39,12 @@ function shockwaveClass() {
 	this.detectCollisionWithEntity = function(otherEntity, givesScore) {
 		var distanceFromOrigin = distanceBetween(this, otherEntity);
 		if(distanceFromOrigin <= this.radius + otherEntity.collisionRadius) {
-			otherEntity.hp -= this.shockwaveDamage;
+			otherEntity.takeDamage(this.shockwaveDamage);
 
-			var damageDone = new floatingTextClass();
-			damageDone.init(this.shockwaveDamage, otherEntity.x, otherEntity.y, 'red');
-			allFloatingText.push(damageDone);
-
-			if(otherEntity.hp <= 0) {
-				otherEntity.hp = 0;
+			if(otherEntity.isDead) {
 				if(givesScore) {
 					awardScore(otherEntity);
 				}
-				otherEntity.isDead = true;
 			}
 		}
 	}
