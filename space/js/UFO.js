@@ -20,6 +20,7 @@ function UFOClass() {
 		this.collisionRadius = UFO_COLLISION_RADIUS;
 		this.maxhp = 20;
 		this.hp = this.maxhp;
+		this.mass = 0.8;
 
 		this.cannon = new pulseCannonClass(UFO_CANNON_BASE_DAMAGE, UFO_CANNON_BASE_COOLDOWN, UFOShotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, enemyShots);
 		this.reset();

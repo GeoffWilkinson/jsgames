@@ -51,6 +51,7 @@ function shipClass() {
 		this.hp = this.maxhp;
 		this.thrustMultiplier = 1;
 		this.thrustMultiplierDuration = 0;
+		this.mass = 1;
 
 		this.cannon = new pulseCannonClass(CANNON_BASE_DAMAGE, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
 		this.shockwaveGenerator = new shockwaveGeneratorClass(SHOCKWAVE_BASE_DAMAGE, SHOCKWAVE_BASE_COOLDOWN, SHOCKWAVE_SPEED, SHOCKWAVE_RANGE, SHOCKWAVE_COLOUR, playerShockwaves);
@@ -154,7 +155,24 @@ function shipClass() {
 
 	this.detectCollisionWithEntity = function(otherEntity) {
 		if(distanceBetween(this, otherEntity) <= this.collisionRadius + otherEntity.collisionRadius) {
-			this.isDead = true;
+			this.handleElasticObjectCollision(otherEntity);
+
+			this.hp -= 10;
+			var damageDone = new floatingTextClass();
+			damageDone.init(10, this.x, this.y, 'red');
+			allFloatingText.push(damageDone);
+			if(this.hp <= 0) {
+				this.isDead = true;
+			}
+
+			otherEntity.hp -= 10;
+			var damageDone = new floatingTextClass();
+			damageDone.init(10, otherEntity.x, otherEntity.y, 'red');
+			allFloatingText.push(damageDone);
+			if(otherEntity.hp <= 0) {
+				otherEntity.isDead = true;
+			}
+
 			document.getElementById("debugText").innerHTML = "Player Crashed!";
 		}
 	}

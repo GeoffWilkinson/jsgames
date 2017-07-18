@@ -18,6 +18,7 @@ function asteroidClass() {
 		this.collisionRadius = ASTEROID_COLLISION_RADIUS;
 		this.maxhp = 120;
 		this.hp = this.maxhp;
+		this.mass = 5;
 
 		this.reset();
 	}
