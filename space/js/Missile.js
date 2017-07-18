@@ -11,12 +11,16 @@ missileClass.prototype = new movingWrapPositionClass();
 function missileClass() {
 	this.init = function(whichGraphic, collisionRadius) {
 		this.myBitmap = whichGraphic;
-		this.collisionRadius = collisionRadius;
-		this.isDead = false;
 		this.exhaust = new animatedSprite();
 		this.exhaust.init(missileExhaustPic, 3, 1);
 		this.exhaustSequence = [0, 1, 2];
 		this.exhaust.setAnimationSequence(this.exhaustSequence, "reverse");
+
+		this.collisionRadius = collisionRadius;
+		this.maxhp = 1;
+		this.hp = this.maxhp;
+
+		this.isDead = false;
 	}
 
 	this.superclassMove = this.move;
@@ -96,10 +100,14 @@ function missileClass() {
 
 	this.detectCollisionWithEntity = function(otherEntity, givesScore) {
 		if(distanceBetween(this, otherEntity) <= this.collisionRadius + otherEntity.collisionRadius) {
-			if(givesScore) {
-				awardScore(otherEntity);
+			otherEntity.hp -= this.missileDamage;
+			if(otherEntity.hp <= 0) {
+				otherEntity.hp = 0;
+				if(givesScore) {
+					awardScore(otherEntity);
+				}
+				otherEntity.isDead = true;
 			}
-			otherEntity.isDead = true;
 			this.isDead = true;
 		}
 	}

@@ -1,11 +1,13 @@
 const UFO_SPEED = 1.9;
 const UFO_TIME_BETWEEN_CHANGE_DIR = 85;
 const UFO_COLLISION_RADIUS = 16;
-const UFO_CANNON_BASE_COOLDOWN = 90;
 const UFO_INACCURACY_DEGREES = 10;
 
 const NUM_UFOS = 3;
 var allUFOs = [];
+
+const UFO_CANNON_BASE_COOLDOWN = 90;
+const UFO_CANNON_BASE_DAMAGE = 10;
 
 UFOClass.prototype = new movingWrapPositionClass();
 
@@ -19,7 +21,7 @@ function UFOClass() {
 		this.maxhp = 20;
 		this.hp = this.maxhp;
 
-		this.cannon = new pulseCannonClass(1, UFO_CANNON_BASE_COOLDOWN, UFOShotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, enemyShots);
+		this.cannon = new pulseCannonClass(UFO_CANNON_BASE_DAMAGE, UFO_CANNON_BASE_COOLDOWN, UFOShotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, enemyShots);
 		this.reset();
 	}
 
