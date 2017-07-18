@@ -1,5 +1,6 @@
 const POWERUP_TYPES = ["repair", "shield", "speed", "damage"];
-const POWERUP_COLLISION_RADIUS = 6;
+const POWERUP_COLLISION_RADIUS = 10;
+const POWERUP_DURATION = 300;
 
 var allPowerups = [];
 
@@ -40,14 +41,19 @@ function powerupClass() {
 		} else if(this.powerupType == 1) {
 
 		} else if(this.powerupType == 2) {
-			var healingDone = new floatingTextClass();
-			healingDone.init("SPEED UP!", finder.x, finder.y, 'orange');
-			allFloatingText.push(healingDone);
+			var powerupText = new floatingTextClass();
+			powerupText.init("SPEED UP!", finder.x, finder.y, 'orange');
+			allFloatingText.push(powerupText);
 
-			finder.thrustMultiplier = 1.5;
-			finder.thrustMultiplierDuration = 200;
+			finder.thrustMultiplier += 1.5;
+			finder.thrustMultiplierDuration += POWERUP_DURATION;
 		} else if(this.powerupType == 3) {
-			
+			var powerupText = new floatingTextClass();
+			powerupText.init("DAMAGE UP!", finder.x, finder.y, 'red');
+			allFloatingText.push(powerupText);
+
+			finder.damageMultiplier += 1.5;
+			finder.damageMultiplierDuration += POWERUP_DURATION;
 		}
 		this.isDead = true;
 	}

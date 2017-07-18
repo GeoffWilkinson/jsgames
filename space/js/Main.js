@@ -8,12 +8,13 @@
 // 6. stats page upon game over (therefore stat tracking in game).
 // 7. ship inventory with equipable items.
 // 8. post-level ship configuration.
-// 9. temporary stat boost drops.
-// 11. spread out floating combat text.
+// 9. temporary powerups.
 
 // QoL DONE:
 
 // 10. entity properties more complex, e.g. damage/hp
+// 11. spread out floating combat text.
+// 12. better collisions.
 
 // save the canvas for dimensions, and its 2d context for drawing to it
 var canvas;

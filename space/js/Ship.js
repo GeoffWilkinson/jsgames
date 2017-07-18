@@ -51,6 +51,8 @@ function shipClass() {
 		this.hp = this.maxhp;
 		this.thrustMultiplier = 1;
 		this.thrustMultiplierDuration = 0;
+		this.damageMultiplier = 1.5;
+		this.damageMultiplierDuration = 200;
 		this.mass = 1;
 
 		this.cannon = new pulseCannonClass(CANNON_BASE_DAMAGE, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
@@ -131,6 +133,10 @@ function shipClass() {
 		this.thrustMultiplierDuration--;
 		if(this.thrustMultiplierDuration < 0) {
 			this.thrustMultiplier = 1;
+		}
+		this.damageMultiplierDuration--;
+		if(this.damageMultiplierDuration < 0) {
+			this.damageMultiplier = 1;
 		}
 	}
 
