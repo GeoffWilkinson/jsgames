@@ -134,7 +134,7 @@ function shipClass() {
 		}
 	}
 
-	this.checkCollisionWithEntity = function(otherEntity) {
+	this.detectCollisionWithEntity = function(otherEntity) {
 		if(distanceBetween(this, otherEntity) <= this.collisionRadius + otherEntity.collisionRadius) {
 			this.isDead = true;
 			document.getElementById("debugText").innerHTML = "Player Crashed!";

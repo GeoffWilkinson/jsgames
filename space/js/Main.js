@@ -59,6 +59,7 @@ function handleAllDeadObjects() {
 	removeDeadObjects(enemyShots);
 	removeDeadObjects(asteroidFragments);
 	removeDeadObjects(allFloatingText);
+	removeDeadObjects(allPowerups);
 
 	// Special case: if a missile was targetting a dead UFO, we clear its target
 	for(var i = 0; i < allUFOs.length; i++) {
@@ -72,10 +73,11 @@ function handleAllDeadObjects() {
 	}
 	removeDeadObjects(allUFOs);
 
-	// Special case: asteroids fragment
+	// Special case: asteroids fragment and drop powerups
 	for(var i = 0; i < allAsteroids.length; i++) {
 		if(allAsteroids[i].isDead) {
 			allAsteroids[i].fragment();
+			spawnPowerup(Math.floor(Math.random() * POWERUP_TYPES.length), allAsteroids[i].x, allAsteroids[i].y);
 		}
 	}
 	removeDeadObjects(allAsteroids);
@@ -102,10 +104,10 @@ function handleAllDeadObjects() {
 function checkAllCollisions() {
 	// Player ship collisions
 	for(var i = 0; i < allUFOs.length; i++) {
-		p1.checkCollisionWithEntity(allUFOs[i], false);
+		p1.detectCollisionWithEntity(allUFOs[i], false);
 	}
 	for(var i = 0; i < allAsteroids.length; i++) {
-		p1.checkCollisionWithEntity(allAsteroids[i], false);
+		p1.detectCollisionWithEntity(allAsteroids[i], false);
 	}
 
 	// Shot collisions
@@ -185,6 +187,11 @@ function checkAllCollisions() {
 		for(var j = 0; j < allUFOs.length; j++) {
 			asteroidFragments[i].detectCollisionWithEntity(allUFOs[j], true);
 		}
+	}
+
+	// Item collisions (pickups)
+	for(var i = 0; i < allPowerups.length; i++) {
+		allPowerups[i].detectCollisionWithEntity(p1);
 	}
 }
 
@@ -289,6 +296,7 @@ function moveInGame() {
 function drawInGame() {
 	colourRect(0, 0, canvas.width, canvas.height, 'black');
 
+	drawAllGroupEntities(allPowerups);
 	drawAllGroupEntities(playerShots);
 	drawAllGroupEntities(playerShockwaves);
 	drawAllGroupEntities(playerMissiles);
