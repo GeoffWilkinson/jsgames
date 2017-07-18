@@ -39,3 +39,16 @@ function floatingTextClass() {
 		canvasContext.restore();
 	}
 }
+
+function declutterText() {
+	var occupiedPositions = [];
+	for(var i = 0; i < allFloatingText.length; i++) {
+		for(var j = 0; j < occupiedPositions.length; j++) {
+			if(distanceBetween(allFloatingText[i], occupiedPositions[j]) <= 5) {
+				allFloatingText[i].x += Math.sign(Math.random() - 0.5) * (5 + Math.random() * 5);
+				allFloatingText[i].y += Math.sign(Math.random() - 0.5) * (5 + Math.random() * 5);
+			}
+		}
+		occupiedPositions.push({x: allFloatingText[i].x, y: allFloatingText[i].y});
+	}
+}

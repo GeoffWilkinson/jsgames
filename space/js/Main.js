@@ -314,6 +314,8 @@ function drawInGame() {
 	drawAllGroupEntities(allUFOs);
 
 	drawUI();
+	// Before we draw the floating text we should spread it out a bit.
+	declutterText();
 	drawAllGroupEntities(allFloatingText);
 }
 
