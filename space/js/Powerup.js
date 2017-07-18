@@ -32,7 +32,7 @@ function powerupClass() {
 
 	this.pickup = function(finder) {
 		if(this.powerupType == 0) {
-			this.hp = this.maxhp;
+			finder.hp = finder.maxhp;
 		} else if(this.powerupType == 1) {
 
 		} else if(this.powerupType == 2) {
