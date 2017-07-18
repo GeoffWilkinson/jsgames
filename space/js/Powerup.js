@@ -32,11 +32,16 @@ function powerupClass() {
 
 	this.pickup = function(finder) {
 		if(this.powerupType == 0) {
+			var healingDone = new floatingTextClass();
+			healingDone.init(finder.maxhp - finder.hp, finder.x, finder.y, 'green');
+			allFloatingText.push(healingDone);
+
 			finder.hp = finder.maxhp;
 		} else if(this.powerupType == 1) {
 
 		} else if(this.powerupType == 2) {
-			
+			finder.thrustMultiplier = 1.5;
+			finder.thrustMultiplierDuration = 200;
 		} else if(this.powerupType == 3) {
 			
 		}
@@ -45,7 +50,7 @@ function powerupClass() {
 
 	this.detectCollisionWithEntity = function(otherEntity) {
 		if(distanceBetween(this, otherEntity) <= this.collisionRadius + otherEntity.collisionRadius) {
-			this.pickup();
+			this.pickup(otherEntity);
 			document.getElementById("debugText").innerHTML = "Player picked up " + POWERUP_TYPES[this.powerupType] + " powerup!";
 		}
 	}

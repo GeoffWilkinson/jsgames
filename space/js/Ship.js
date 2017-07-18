@@ -49,6 +49,8 @@ function shipClass() {
 		this.collisionRadius = SHIP_COLLISION_RADIUS;
 		this.maxhp = 100;
 		this.hp = this.maxhp;
+		this.thrustMultiplier = 1;
+		this.thrustMultiplierDuration = 0;
 
 		this.cannon = new pulseCannonClass(CANNON_BASE_DAMAGE, CANNON_BASE_COOLDOWN, shotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, playerShots);
 		this.shockwaveGenerator = new shockwaveGeneratorClass(SHOCKWAVE_BASE_DAMAGE, SHOCKWAVE_BASE_COOLDOWN, SHOCKWAVE_SPEED, SHOCKWAVE_RANGE, SHOCKWAVE_COLOUR, playerShockwaves);
@@ -93,15 +95,15 @@ function shipClass() {
 		}
 
 		if(this.keyHeld_Gas) {
-			this.vX += Math.cos(this.ang) * THRUST_POWER;
-			this.vY += Math.sin(this.ang) * THRUST_POWER;
+			this.vX += Math.cos(this.ang) * THRUST_POWER * this.thrustMultiplier;
+			this.vY += Math.sin(this.ang) * THRUST_POWER * this.thrustMultiplier;
 			this.keyHeldFor++;
 			if(this.keyHeldFor > 45) {
 				this.keyHeldFor = 45;
 			}
 		} else if(this.keyHeld_Reverse) {
-			this.vX -= Math.cos(this.ang) * THRUST_POWER/2;
-			this.vY -= Math.sin(this.ang) * THRUST_POWER/2;
+			this.vX -= Math.cos(this.ang) * THRUST_POWER * this.thrustMultiplier/2;
+			this.vY -= Math.sin(this.ang) * THRUST_POWER * this.thrustMultiplier/2;
 			this.keyHeldFor = 0;
 		} else {
 			this.keyHeldFor--;
@@ -124,6 +126,11 @@ function shipClass() {
 
 		this.vX *= SPACESPEED_DECAY_MULT;
 		this.vY *= SPACESPEED_DECAY_MULT;
+
+		this.thrustMultiplierDuration--;
+		if(this.thrustMultiplierDuration < 0) {
+			this.thrustMultiplier = 1;
+		}
 	}
 
 	this.selectWeapon = function(weaponIndex) {

@@ -53,6 +53,11 @@ function beamClass() {
 	this.detectCollisionWithEntity = function(otherEntity, givesScore) {
 		if(otherEntity == this.markedEntity) {
 			otherEntity.hp -= this.beamDamage;
+
+			var damageDone = new floatingTextClass();
+			damageDone.init(this.beamDamage, otherEntity.x, otherEntity.y, 'red');
+			allFloatingText.push(damageDone);
+
 			if(otherEntity.hp <= 0) {
 				otherEntity.hp = 0;
 				if(givesScore) {

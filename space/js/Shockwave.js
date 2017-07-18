@@ -40,6 +40,11 @@ function shockwaveClass() {
 		var distanceFromOrigin = distanceBetween(this, otherEntity);
 		if(distanceFromOrigin <= this.radius + otherEntity.collisionRadius) {
 			otherEntity.hp -= this.shockwaveDamage;
+
+			var damageDone = new floatingTextClass();
+			damageDone.init(this.shockwaveDamage, otherEntity.x, otherEntity.y, 'red');
+			allFloatingText.push(damageDone);
+
 			if(otherEntity.hp <= 0) {
 				otherEntity.hp = 0;
 				if(givesScore) {

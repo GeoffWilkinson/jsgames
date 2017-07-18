@@ -6,6 +6,7 @@ var highScore = 0;
 var timeSinceLastHit = COMBO_TIMEOUT;
 var hitCombo = 1;
 var hitComboReset = true;
+var enableHitScore = true;
 
 function calculateHitScore() {
 	timeSinceLastHit = 0;
@@ -27,9 +28,11 @@ function awardScore(forEntity) {
 	var scoreGained = calculateHitScore();
 	addScoreToTotal(scoreGained);
 
-	var hitScore = new floatingTextClass();
-	hitScore.init(scoreGained, forEntity.x, forEntity.y, 'yellow');
-	allFloatingText.push(hitScore);
+	if(enableHitScore) {
+		var hitScore = new floatingTextClass();
+		hitScore.init(scoreGained, forEntity.x, forEntity.y, 'yellow');
+		allFloatingText.push(hitScore);
+	}
 
 	var combo = new floatingTextClass();
 	combo.init(hitCombo + "x combo", p1.x, p1.y, 'yellow');
