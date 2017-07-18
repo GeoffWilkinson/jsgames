@@ -3,12 +3,13 @@
 // 1. make the playing field bigger.
 // 2. minimap/HUD to track off screen entities.
 // 3. alternate control schemes...
-// 4. spawn exclusion zone around player for asteroids and UFOs
-// 5. game over screen when player dies
-// 6. stats page upon game over (therefore stat tracking in game)
-// 7. ship inventory with equipable items
-// 8. post-level ship configuration
-// 9. temporary stat boost drops
+// 4. spawn exclusion zone around player for asteroids and UFOs.
+// 5. game over screen when player dies.
+// 6. stats page upon game over (therefore stat tracking in game).
+// 7. ship inventory with equipable items.
+// 8. post-level ship configuration.
+// 9. temporary stat boost drops.
+// 11. spread out floating combat text.
 
 // QoL DONE:
 
