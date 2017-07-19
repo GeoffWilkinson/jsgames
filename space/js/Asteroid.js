@@ -2,7 +2,6 @@ const ASTEROID_COLLISION_RADIUS = 46;
 const ASTEROID_SPEED = 1.2;
 const FRAGMENTATION_AMOUNT = 8;
 
-const NUM_ASTEROIDS = 2;
 var allAsteroids = [];
 
 const ASTEROID_FRAGMENT_DAMAGE = 20;

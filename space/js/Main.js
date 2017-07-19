@@ -90,19 +90,6 @@ function handleAllDeadObjects() {
 	}
 	removeDeadObjects(allAsteroids);
 
-	// Special case: we spawn a new UFO when one dies
-	for(var i = allUFOs.length; i < NUM_UFOS; i++) {
-		var newUFO = new UFOClass();
-		newUFO.init(UFOPic);
-		allUFOs.push(newUFO);
-	}
-	// Special case: we spawn a new asteroid when one dies
-	for(var i = allAsteroids.length; i < NUM_ASTEROIDS; i++) {
-		var newAsteroid = new asteroidClass();
-		newAsteroid.init(asteroidPic);
-		allAsteroids.push(newAsteroid);
-	}
-
 	// Special case: player resets instead of being removed
 	if(p1.isDead) {
 		p1.reset();
@@ -234,18 +221,8 @@ function loadingDoneSoStartGame() {
 
 	// Initialise player
 	p1.init(playerPic);
-	// Initialise all UFOs
-	for(var i = 0; i < NUM_UFOS; i++) {
-		var newUFO = new UFOClass();
-		newUFO.init(UFOPic);
-		allUFOs.push(newUFO);
-	}
-	// Initialise all asteroids
-	for(var i = 0; i < NUM_ASTEROIDS; i++) {
-		var newAsteroid = new asteroidClass();
-		newAsteroid.init(asteroidPic);
-		allAsteroids.push(newAsteroid);
-	}
+
+	loadLevel(0);
 
 	initInput(); 
 }
@@ -305,6 +282,19 @@ function moveInGame() {
 
 	checkAllCollisions();
 	handleAllDeadObjects();
+
+	if(allUFOs.length == 0) {
+		var nextWave = thisWave + 1;
+		var nextLevel = thisLevel;
+		if(nextWave > maxWave) {
+			nextWave = 0;
+			nextLevel = thisLevel + 1;
+			if(nextLevel > maxLevel) {
+				nextLevel = 0;
+			}
+		}
+		loadWave(nextLevel, nextWave);
+	}
 }
 
 function drawInGame() {
