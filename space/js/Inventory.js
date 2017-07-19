@@ -14,22 +14,50 @@ function spawnInventory() {
 	return stackInventory(drops);
 }
 
-function stackInventory(inventoryIn) {
-	var inventoryOut = [];
-	for(var i = 0; i < inventoryIn.length; i++) {
-		if(inventoryOut.length > 0) {
-			for(var j = 0; j < inventoryOut.length; j++) {
-				if(inventoryIn[i].item == inventoryOut[j].item && inventoryIn[i].item.stackable) {
-					inventoryOut[j].count += inventoryIn[i].count;
-				} else {
+function stackInventory(inventoryIn, intoInventory) {
+	var stacked = false;
+	if(!intoInventory) {
+		var inventoryOut = [];
+		for(var i = 0; i < inventoryIn.length; i++) {
+			stacked = false;
+			if(inventoryOut.length > 0) {
+				for(var j = 0; j < inventoryOut.length; j++) {
+					if(inventoryIn[i].item == inventoryOut[j].item && inventoryIn[i].item.stackable) {
+						inventoryOut[j].count += inventoryIn[i].count;
+						stacked = true;
+						break;
+					}
+				}
+				if(!stacked) {
 					inventoryOut.push(inventoryIn[i]);
 				}
+			} else {
+				inventoryOut.push(inventoryIn[i]);
 			}
-		} else {
-			inventoryOut.push(inventoryIn[i]);
 		}
+		//console.log("inventoryOut = " + readInventory(inventoryOut));
+		return inventoryOut;
+	} else {
+		for(var i = 0; i < inventoryIn.length; i++) {
+			stacked = false;
+			if(intoInventory.length > 0) {
+				for(var j = 0; j < intoInventory.length; j++) {
+					if(inventoryIn[i].item == intoInventory[j].item && inventoryIn[i].item.stackable) {
+						intoInventory[j].count += inventoryIn[i].count;
+						stacked = true;
+						break;
+					}
+				}
+				if(!stacked) {
+					intoInventory.push(inventoryIn[i]);
+				}
+			} else {
+				intoInventory.push(inventoryIn[i]);
+			}
+		}
+		//console.log("intoInventory = " + readInventory(intoInventory));
+		return intoInventory;
 	}
-	return inventoryOut;
 }
 
 function readInventory(inventoryIn) {
@@ -39,6 +67,9 @@ function readInventory(inventoryIn) {
 		delimiter = ", ";
 	}
 	for(var i = 0; i < inventoryIn.length; i++) {
+		if(i == inventoryIn.length - 1) {
+			delimiter = "";
+		}
 		readThis = readThis + inventoryIn[i].count + "x " + inventoryIn[i].item.name + delimiter;
 	}
 	return readThis;

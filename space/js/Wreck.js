@@ -41,9 +41,7 @@ function wreckClass() {
 	}
 
 	this.pickup = function(finder) {
-		for(var i = 0; i < this.inventory.length; i++) {
-			finder.inventory.push(this.inventory[i]);
-		}
+		stackInventory(this.inventory, finder.inventory);
 		this.inventory = [];
 		this.isDead = true;
 	}
