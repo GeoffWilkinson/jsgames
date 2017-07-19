@@ -13,6 +13,8 @@ var PUShieldPic = document.createElement("img");
 var PUSpeedPic = document.createElement("img");
 var PUDamagePic = document.createElement("img");
 
+var UFOWreckPic = document.createElement("img");
+
 var inertiaLogoPic = document.createElement("img");
 var playButtonPic = document.createElement("img");
 var controlsButtonPic = document.createElement("img");
@@ -48,6 +50,7 @@ function loadImages() {
 	{varName: PUShieldPic, theFile: "pu_shield.png"},
 	{varName: PUSpeedPic, theFile: "pu_speed.png"},
 	{varName: PUDamagePic, theFile: "pu_damage.png"},
+	{varName: UFOWreckPic, theFile: "ufo_wreck.png"},
 	{varName: inertiaLogoPic, theFile: "inertia_logo.png"},
 	{varName: playButtonPic, theFile: "play_button.png"},
 	{varName: controlsButtonPic, theFile: "controls_button.png"},
