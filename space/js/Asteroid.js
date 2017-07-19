@@ -18,14 +18,6 @@ function asteroidClass() {
 		this.idleRotationDegrees = 0;
 		this.idleRotation = 0;
 
-		this.reset();
-	}
-
-	this.superclassReset = this.reset;
-
-	this.reset = function() {
-		this.superclassReset();
-
 		this.collisionRadius = ASTEROID_COLLISION_RADIUS;
 		this.maxhp = 120;
 		this.hp = this.maxhp;
@@ -38,7 +30,9 @@ function asteroidClass() {
 		var randAng = Math.random() * Math.PI * 2;
 		this.vX = Math.cos(randAng) * ASTEROID_SPEED;
 		this.vY = Math.sin(randAng) * ASTEROID_SPEED;
-	} // end of reset
+
+		this.isDead = false;
+	}
 
 	this.superclassMove = this.move;
 

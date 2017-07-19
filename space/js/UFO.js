@@ -20,15 +20,6 @@ function UFOClass() {
 		this.idleRotationDegrees = 0;
 		this.idleRotation = 0;
 
-		this.cannon = new pulseCannonClass(UFO_CANNON_BASE_DAMAGE, UFO_CANNON_BASE_COOLDOWN, UFOShotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, enemyShots);
-		this.reset();
-	}
-
-	this.superclassReset = this.reset;
-
-	this.reset = function() {
-		this.superclassReset();
-
 		this.collisionRadius = UFO_COLLISION_RADIUS;
 		this.maxhp = 20;
 		this.hp = this.maxhp;
@@ -37,10 +28,16 @@ function UFOClass() {
 		this.ang = -0.5 * Math.PI;
 		this.x = Math.random() * canvas.width;
 		this.y = Math.random() * canvas.height;
+		this.vX = 0;
+		this.vY = 0;
 		this.cyclesTilDirectionChange = 0;
 
 		this.cannonCooldown = 0;
-	} // end of reset
+
+		this.cannon = new pulseCannonClass(UFO_CANNON_BASE_DAMAGE, UFO_CANNON_BASE_COOLDOWN, UFOShotPic, SHOT_SPEED, SHOT_LIFE, SHOT_COLLISION_RADIUS, enemyShots);
+
+		this.isDead = false;
+	}
 
 	this.superclassMove = this.move;
 
