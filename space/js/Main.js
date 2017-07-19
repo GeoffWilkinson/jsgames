@@ -65,8 +65,9 @@ function handleAllDeadObjects() {
 	removeDeadObjects(asteroidFragments);
 	removeDeadObjects(allFloatingText);
 	removeDeadObjects(allPowerups);
+	removeDeadObjects(allWrecks);
 
-	// Special case: if a missile was targetting a dead UFO, we clear its target
+	// Special case: if a missile was targetting a dead UFO, we clear its target.
 	for(var i = 0; i < allUFOs.length; i++) {
 		if(allUFOs[i].isDead) {
 			for(var j = 0; j < playerMissiles.length; j++) {
@@ -74,6 +75,8 @@ function handleAllDeadObjects() {
 					playerMissiles[j].target = undefined;
 				}
 			}
+			// Also, UFOs spwan wrecks when they die
+			spawnWreck(UFOWreckPic, allUFOs[i]);
 		}
 	}
 	removeDeadObjects(allUFOs);
@@ -198,6 +201,11 @@ function checkAllCollisions() {
 	for(var i = 0; i < allPowerups.length; i++) {
 		allPowerups[i].detectCollisionWithEntity(p1);
 	}
+
+	// Wreck collisions (pickups)
+	for(var i = 0; i < allWrecks.length; i++) {
+		allWrecks[i].detectCollisionWithEntity(p1);
+	}
 }
 
 function moveAllGroupEntities(entityArray) {
@@ -291,6 +299,7 @@ function moveInGame() {
 	moveAllGroupEntities(playerBeams);
 	moveAllGroupEntities(enemyShots);
 	moveAllGroupEntities(asteroidFragments);
+	moveAllGroupEntities(allWrecks);
 
 	moveAllGroupEntities(allFloatingText);
 
@@ -308,6 +317,7 @@ function drawInGame() {
 	drawAllGroupEntities(playerBeams);
 	drawAllGroupEntities(enemyShots);
 	drawAllGroupEntities(asteroidFragments);
+	drawAllGroupEntities(allWrecks);
 
 	p1.draw();
 
