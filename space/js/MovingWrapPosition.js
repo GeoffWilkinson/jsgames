@@ -1,3 +1,5 @@
+const EQUIPMENT_SLOT_TYPES = ["weapon"];
+
 function movingWrapPositionClass() {
 	this.init = function() {
 		this.maxhp = 0;

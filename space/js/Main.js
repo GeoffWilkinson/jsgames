@@ -6,12 +6,12 @@
 // 4. spawn exclusion zone around player for asteroids and UFOs.
 // 5. game over screen when player dies.
 // 6. stats page upon game over (therefore stat tracking in game).
-// 7. ship inventory with equipable items.
+// 7. ship inventory with equippable items.
 // 8. post-level ship configuration.
-// 9. temporary powerups.
 
 // QoL DONE:
 
+// 9. temporary powerups.
 // 10. entity properties more complex, e.g. damage/hp
 // 11. spread out floating combat text.
 // 12. better collisions.
