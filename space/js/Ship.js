@@ -66,6 +66,7 @@ function shipClass() {
 		this.weapons = [this.cannon, this.shockwaveGenerator, this.missileLauncher, this.beamWeapon];
 		this.primaryWeapon = this.weapons[0];
 
+		this.inventory = [];
 		this.reset();
 	}
 

@@ -24,6 +24,8 @@ function wreckClass() {
 		this.hp = this.maxhp;
 		this.mass = 4;
 		this.isDead = false;
+
+		this.inventory = spawnInventory();
 	}
 
 	this.superclassMove = this.move;
@@ -38,13 +40,28 @@ function wreckClass() {
 		this.idleRotation = Math.PI * this.idleRotationDegrees / 180;
 	}
 
+	this.pickup = function(finder) {
+		for(var i = 0; i < this.inventory.length; i++) {
+			finder.inventory.push(this.inventory[i]);
+		}
+		this.inventory = [];
+		this.isDead = true;
+	}
+
+	this.detectCollisionWithEntity = function(otherEntity) {
+		if(distanceBetween(this, otherEntity) <= this.collisionRadius + otherEntity.collisionRadius) {
+			this.pickup(otherEntity);
+			document.getElementById("debugText").innerHTML = readInventory(p1.inventory);
+		}
+	}
+
 	this.draw = function() {
 		drawBitmapCenteredAtLocationWithRotation(this.myBitmap, this.x, this.y, this.idleRotation);
 	}
 } // end of class
 
-function spawnWreck(whichGraphic, spawnedBy) {
+function spawnWreck(whichImage, spawnedBy) {
 	newWreck = new wreckClass();
-	newWreck.init(whichGraphic, spawnedBy);
+	newWreck.init(whichImage, spawnedBy);
 	allWrecks.push(newWreck);
 }
