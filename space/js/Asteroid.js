@@ -12,9 +12,9 @@ asteroidClass.prototype = new movingWrapPositionClass();
 function asteroidClass() {
 	this.superclassInit = this.init;
 
-	this.init = function(whichGraphic) {
+	this.init = function(whichImage) {
 		this.superclassInit();
-		this.myBitmap = whichGraphic;
+		this.myBitmap = whichImage;
 		this.idleRotationDegrees = 0;
 		this.idleRotation = 0;
 

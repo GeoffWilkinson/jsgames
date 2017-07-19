@@ -15,9 +15,9 @@ shotClass.prototype = new movingWrapPositionClass();
 function shotClass() {
 	this.superclassInit = this.init;
 
-	this.init = function(whichGraphic, collisionRadius) {
+	this.init = function(whichImage, collisionRadius) {
 		this.superclassInit();
-		this.myBitmap = whichGraphic;
+		this.myBitmap = whichImage;
 
 		this.collisionRadius = collisionRadius;
 		this.maxhp = 1;

@@ -43,9 +43,9 @@ function shipClass() {
 
 	this.superclassInit = this.init;
 
-	this.init = function(whichGraphic) {
+	this.init = function(whichImage) {
 		this.superclassInit();
-		this.myBitmap = whichGraphic;
+		this.myBitmap = whichImage;
 		this.exhaust = new animatedSprite();
 		this.exhaust.init(shipExhaustPic, 3, 3);
 

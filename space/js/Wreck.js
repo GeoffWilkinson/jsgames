@@ -7,9 +7,9 @@ wreckClass.prototype = new movingWrapPositionClass();
 function wreckClass() {
 	this.superclassInit = this.init;
 
-	this.init = function(whichGraphic, spawnedBy) {
+	this.init = function(whichImage, spawnedBy) {
 		this.superclassInit();
-		this.myBitmap = whichGraphic;
+		this.myBitmap = whichImage;
 		this.idleRotationDegrees = 0;
 		this.idleRotation = 0;
 

@@ -11,9 +11,9 @@ missileClass.prototype = new movingWrapPositionClass();
 function missileClass() {
 	this.superclassInit = this.init;
 
-	this.init = function(whichGraphic, collisionRadius) {
+	this.init = function(whichImage, collisionRadius) {
 		this.superclassInit();
-		this.myBitmap = whichGraphic;
+		this.myBitmap = whichImage;
 		this.exhaust = new animatedSprite();
 		this.exhaust.init(missileExhaustPic, 3, 1);
 		this.exhaustSequence = [0, 1, 2];
