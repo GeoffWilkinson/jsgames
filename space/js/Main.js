@@ -6,8 +6,12 @@
 // 4. spawn exclusion zone around player for asteroids and UFOs.
 // 5. game over screen when player dies.
 // 6. stats page upon game over (therefore stat tracking in game).
+
+// QoL IN PROGRESS:
+
 // 7. ship inventory with equippable items.
 // 8. post-level ship configuration.
+// 13. countdown between waves.
 
 // QoL DONE:
 
