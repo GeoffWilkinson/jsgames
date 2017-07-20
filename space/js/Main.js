@@ -230,9 +230,23 @@ function loadingDoneSoStartGame() {
 	// Initialise player
 	p1.init(playerPic);
 
-	loadLevel(0);
-
 	initInput(); 
+}
+
+function resetGame() {
+	allPowerups.length = 0;
+	playerShots.length = 0;
+	playerShockwaves.length = 0;
+	playerMissiles.length = 0;
+	playerBeams.length = 0;
+	enemyShots.length = 0;
+	asteroidFragments.length = 0;
+	allWrecks.length = 0;
+	allAsteroids.length = 0;
+	allUFOs.length = 0;
+	allFloatingText.length = 0;
+	loadLevel(0);
+	p1.reset();
 }
 
 function gameLoop() {
