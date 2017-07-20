@@ -81,7 +81,6 @@ function shipClass() {
 		this.shieldhp = 0;
 
 		this.ang = -0.5 * Math.PI;
-		this.cannonCooldown = 0;
 		totalScore = 0;
 		hitComboReset = true;
 		this.keyHeldFor = 0;
