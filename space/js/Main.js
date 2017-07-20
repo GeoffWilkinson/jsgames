@@ -15,7 +15,6 @@
 
 // 13. countdown between waves.
 // 14. inventory/equipment window.
-// 15. pause menu.
 
 // QoL DONE:
 
@@ -23,6 +22,7 @@
 // 10. entity properties more complex, e.g. damage/hp
 // 11. spread out floating combat text.
 // 12. better collisions.
+// 15. pause menu.
 
 // save the canvas for dimensions, and its 2d context for drawing to it
 var canvas;
@@ -254,14 +254,8 @@ function resetGame() {
 
 function gameLoop() {
 	// move everything
-	if(gameMode[0]) {
-		moveTitleScreen();
-	} else if(gameMode[1]) {
-		if(!transitionActive) {
-			moveInGame();
-		}
-	} else if(gameMode[3]) {
-		movePauseScreen();
+	if(gameMode[1] && !transitionActive) {
+		moveInGame();
 	}
 
 	// draw everything
@@ -274,9 +268,7 @@ function gameLoop() {
 	}
 
 	// draw UI
-	if(gameMode[1]) {
-		drawUI();
-	} else if(gameMode[3]) {
+	if(gameMode[1] || gameMode[3]) {
 		drawUI();
 	}
 

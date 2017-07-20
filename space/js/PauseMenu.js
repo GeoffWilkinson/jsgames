@@ -1,24 +1,24 @@
-var buttonPauseX = [328, 340, 352];
-var buttonPauseY = [252, 300, 348];
-var buttonPauseWidth = [144, 120, 96];
-var buttonPauseHeight = [24, 24, 24];
+var pauseMenuBoxX = 316;
+var pauseMenuBoxY = 228;
+var pauseMenuBoxWidth = 168;
+var pauseMenuBoxHeight = 144;
 
-var cursorX = [0, 0];
-var cursorY = [0, 0];
-var cursorVisible = false;
-var cursorRotationDegrees = 0;
-var cursorRotation = 0;
-var cursorImage = UFOPic;
+var buttonPauseX = [316, 316, 316];
+var buttonPauseY = [228, 276, 324];
+var buttonPauseWidth = [168, 168, 168];
+var buttonPauseHeight = [48, 48, 48];
+
+// we do not need to track anything except for Y values
+var buttonHighlightPauseY = 0;
+var buttonHighlightPauseHeight = 48;
+// cursorVisible is reused for this menu.
 
 function checkButtonHoverPause() {
 	for(i = 0; i < buttonPauseX.length; i++) {
 		if(mouseX > buttonPauseX[i] && mouseX < buttonPauseX[i] + buttonPauseWidth[i]) {
 			if(mouseY > buttonPauseY[i] && mouseY < buttonPauseY[i] + buttonPauseHeight[i]) {
 				cursorVisible = true;
-				cursorX[0] = buttonPauseX[i] - (cursorImage.width);
-				cursorY[0] = buttonPauseY[i] + buttonPauseHeight[i]/2;
-				cursorX[1] = buttonPauseX[i] + buttonPauseWidth[i] + (cursorImage.width) - 4; 
-				cursorY[1] = buttonPauseY[i] + buttonPauseHeight[i]/2;
+				buttonHighlightPauseY = buttonPauseY[i];
 			}
 		} else {
 			cursorVisible = false;
@@ -42,29 +42,30 @@ function handleButtonClickPause() {
 	}
 }
 
-function movePauseScreen() {
-	// so the rotation variable stays a reasonably small number...
-	cursorRotationDegrees++;
-	if(cursorRotationDegrees > 360) {
-		cursorRotationDegrees = 1;
-	}
-	cursorRotation = Math.PI * cursorRotationDegrees / 180;
-}
-
 function drawPauseScreen() {
+	// to produce a faded effect
 	drawInGame();
-	// fade rest of screen
 	canvasContext.save();
 	canvasContext.globalAlpha = 0.5;
 	colourRect(0, 0, canvas.width, canvas.height, 'black');
+	// box to hold menu
+	canvasContext.globalAlpha = 1;
+	colourRect(pauseMenuBoxX, pauseMenuBoxY, pauseMenuBoxWidth, pauseMenuBoxHeight, 'black');
+	canvasContext.globalAlpha = 0.15;
+	colourRect(pauseMenuBoxX, pauseMenuBoxY, pauseMenuBoxWidth, pauseMenuBoxHeight, 'white');
 	canvasContext.restore();
+	hollowRect(pauseMenuBoxX, pauseMenuBoxY, pauseMenuBoxWidth, pauseMenuBoxHeight, 'grey', 1);
 	// buttons
-	drawBitmapPositionedByTopLeftCorner(resumeButtonPic, buttonPauseX[0], buttonPauseY[0]);
-	drawBitmapPositionedByTopLeftCorner(equipButtonPic, buttonPauseX[1], buttonPauseY[1]);
-	drawBitmapPositionedByTopLeftCorner(quitButtonPic, buttonPauseX[2], buttonPauseY[2]);
+	drawBitmapCenteredAtLocation(resumeButtonPic, buttonPauseX[0] + buttonPauseWidth[0]/2, buttonPauseY[0] + buttonPauseHeight[0]/2);
+	drawBitmapCenteredAtLocation(equipButtonPic, buttonPauseX[1] + buttonPauseWidth[1]/2, buttonPauseY[1] + buttonPauseHeight[1]/2);
+	drawBitmapCenteredAtLocation(quitButtonPic, buttonPauseX[2] + buttonPauseWidth[2]/2, buttonPauseY[2] + buttonPauseHeight[2]/2);
 
+	// highlight on mouseover
 	if(cursorVisible == true) {
-	    drawBitmapCenteredWithRotation(cursorImage, cursorX[0], cursorY[0], cursorRotation);
-	    drawBitmapCenteredWithRotation(cursorImage, cursorX[1], cursorY[1], -cursorRotation);
+		canvasContext.save();
+		canvasContext.globalAlpha = 0.3;
+		colourRect(pauseMenuBoxX, buttonHighlightPauseY, pauseMenuBoxWidth, buttonHighlightPauseHeight, 'white');
+		canvasContext.restore();
+		hollowRect(pauseMenuBoxX, buttonHighlightPauseY, pauseMenuBoxWidth, buttonHighlightPauseHeight, 'grey', 1);
 	}
 }

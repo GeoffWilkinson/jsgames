@@ -1,24 +1,24 @@
-var buttonTitleX = [352, 304, 304, 316];
-var buttonTitleY = [300, 348, 396, 444];
-var buttonTitleWidth = [96, 192, 192, 168];
-var buttonTitleHeight = [24, 24, 24, 24];
+var titleMenuBoxX = 293;
+var titleMenuBoxY = 304;
+var titleMenuBoxWidth = 214;
+var titleMenuBoxHeight = 192;
 
-var cursorX = [0, 0];
-var cursorY = [0, 0];
+var buttonTitleX = [293, 293, 293, 293];
+var buttonTitleY = [304, 352, 400, 448];
+var buttonTitleWidth = [214, 214, 214, 214];
+var buttonTitleHeight = [48, 48, 48, 48];
+
+// we do not need to track anything except for Y values
+var buttonHighlightTitleY = 0;
+var buttonHighlightTitleHeight = 48;
 var cursorVisible = false;
-var cursorRotationDegrees = 0;
-var cursorRotation = 0;
-var cursorImage = UFOPic;
 
 function checkButtonHoverTitle() {
 	for(i = 0; i < buttonTitleX.length; i++) {
 		if(mouseX > buttonTitleX[i] && mouseX < buttonTitleX[i] + buttonTitleWidth[i]) {
 			if(mouseY > buttonTitleY[i] && mouseY < buttonTitleY[i] + buttonTitleHeight[i]) {
 				cursorVisible = true;
-				cursorX[0] = buttonTitleX[i] - (cursorImage.width);
-				cursorY[0] = buttonTitleY[i] + buttonTitleHeight[i]/2;
-				cursorX[1] = buttonTitleX[i] + buttonTitleWidth[i] + (cursorImage.width) - 4; 
-				cursorY[1] = buttonTitleY[i] + buttonTitleHeight[i]/2;
+				buttonHighlightTitleY = buttonTitleY[i];
 			}
 		} else {
 			cursorVisible = false;
@@ -41,27 +41,29 @@ function handleButtonClickTitle() {
 	}
 }
 
-function moveTitleScreen() {
-	// so the rotation variable stays a reasonably small number...
-	cursorRotationDegrees++;
-	if(cursorRotationDegrees > 360) {
-		cursorRotationDegrees = 1;
-	}
-	cursorRotation = Math.PI * cursorRotationDegrees / 180;
-}
-
 function drawTitleScreen() {
 	// black background
 	colourRect(0, 0, canvas.width, canvas.height, 'black');
+	// box to hold menu
+	canvasContext.save();
+	canvasContext.globalAlpha = 1;
+	colourRect(titleMenuBoxX, titleMenuBoxY, titleMenuBoxWidth, titleMenuBoxHeight, 'black');
+	canvasContext.globalAlpha = 0.15;
+	colourRect(titleMenuBoxX, titleMenuBoxY, titleMenuBoxWidth, titleMenuBoxHeight, 'white');
+	canvasContext.restore();
+	hollowRect(titleMenuBoxX, titleMenuBoxY, titleMenuBoxWidth, titleMenuBoxHeight, 'grey', 1);
 	// buttons and logo images
 	drawBitmapPositionedByTopLeftCorner(inertiaLogoPic, 232, 48);
-	drawBitmapPositionedByTopLeftCorner(playButtonPic, buttonTitleX[0], buttonTitleY[0]);
-	drawBitmapPositionedByTopLeftCorner(controlsButtonPic, buttonTitleX[1], buttonTitleY[1]);
-	drawBitmapPositionedByTopLeftCorner(settingsButtonPic, buttonTitleX[2], buttonTitleY[2]);
-	drawBitmapPositionedByTopLeftCorner(creditsButtonPic, buttonTitleX[3], buttonTitleY[3]);
+	drawBitmapCenteredAtLocation(playButtonPic, buttonTitleX[0] + buttonTitleWidth[0]/2, buttonTitleY[0] + buttonTitleHeight[0]/2);
+	drawBitmapCenteredAtLocation(controlsButtonPic, buttonTitleX[1] + buttonTitleWidth[1]/2, buttonTitleY[1] + buttonTitleHeight[1]/2);
+	drawBitmapCenteredAtLocation(settingsButtonPic, buttonTitleX[2] + buttonTitleWidth[2]/2, buttonTitleY[2] + buttonTitleHeight[2]/2);
+	drawBitmapCenteredAtLocation(creditsButtonPic, buttonTitleX[3] + buttonTitleWidth[3]/2, buttonTitleY[3] + buttonTitleHeight[3]/2);
 
 	if(cursorVisible == true) {
-	    drawBitmapCenteredWithRotation(cursorImage, cursorX[0], cursorY[0], cursorRotation);
-	    drawBitmapCenteredWithRotation(cursorImage, cursorX[1], cursorY[1], -cursorRotation);
+		canvasContext.save();
+		canvasContext.globalAlpha = 0.3;
+		colourRect(titleMenuBoxX, buttonHighlightTitleY, titleMenuBoxWidth, buttonHighlightTitleHeight, 'white');
+		canvasContext.restore();
+		hollowRect(titleMenuBoxX, buttonHighlightTitleY, titleMenuBoxWidth, buttonHighlightTitleHeight, 'grey', 1);
 	}
 }
