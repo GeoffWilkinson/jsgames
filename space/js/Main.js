@@ -32,7 +32,10 @@ var p1 = new shipClass();
 
 // 0: title screen
 // 1: in game
-var gameMode = [true, false];
+// 2: game over screen
+// 3: pause menu
+// 4: inventory/equipment menu
+var gameMode = [true, false, false, false, false];
 var nextGameMode = 0;
 var prevGameMode = 0;
 
@@ -266,12 +269,12 @@ function gameLoop() {
 		drawInGame();
 	}
 
-	// move and draw transitions
-	if(transitionActive) {
-		modeTransition();
-		drawFadeTransition();
+	// draw UI
+	if(gameMode[1]) {
+		drawUI();
+	} else if(gameMode[3]) {
+		drawUI();
 	}
-}
 
 	// move and draw transitions
 	if(transitionActive) {
@@ -334,7 +337,6 @@ function drawInGame() {
 	drawAllGroupEntities(allAsteroids);
 	drawAllGroupEntities(allUFOs);
 
-	drawUI();
 	// Before we draw the floating text we should spread it out a bit.
 	declutterText();
 	drawAllGroupEntities(allFloatingText);
