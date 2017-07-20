@@ -273,14 +273,12 @@ function gameLoop() {
 	}
 }
 
-function drawAll() {
-	if(gameMode[0]) {
-		drawTitleScreen();
-	} else if(gameMode[1]) {
-		drawInGame();
-	}
+	// move and draw transitions
 	if(transitionActive) {
-		drawFadeTransition();
+		modeTransition();
+		if(initialTransitionTimer > 0) {
+			drawFadeTransition();
+		}
 	}
 }
 
