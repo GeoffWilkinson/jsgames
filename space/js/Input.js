@@ -66,12 +66,16 @@ function mouseMoved(evt) {
 	mouseY = evt.clientY - rect.top - root.scrollTop;
 	if(gameMode[0]) {
 		checkButtonHoverTitle();
+	} else if(gameMode[3]) {
+		checkButtonHoverPause();
 	}
 }
 
 function mouseReleased(evt) {
 	if(gameMode[0]) {
 		handleButtonClickTitle();
+	} else if(gameMode[3]) {
+		handleButtonClickPause();
 	}
 }
 
@@ -81,6 +85,13 @@ function keyPressed(evt) {
 }
 
 function keyReleased(evt) {
+	if(evt.keyCode == KEY_P || evt.keyCode == KEY_ESC) {
+		if(gameMode[1]) {
+			switchMode(3, 1);
+		} else if(gameMode[3]) {
+			switchMode(1, 1);
+		}
+	}
 	setKeyHoldState(evt.keyCode, p1, false);
 }
 
