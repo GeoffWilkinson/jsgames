@@ -260,6 +260,8 @@ function gameLoop() {
 		if(!transitionActive) {
 			moveInGame();
 		}
+	} else if(gameMode[3]) {
+		movePauseScreen();
 	}
 
 	// draw everything
@@ -267,6 +269,8 @@ function gameLoop() {
 		drawTitleScreen();
 	} else if(gameMode[1]) {
 		drawInGame();
+	} else if(gameMode[3]) {
+		drawPauseScreen();
 	}
 
 	// draw UI
