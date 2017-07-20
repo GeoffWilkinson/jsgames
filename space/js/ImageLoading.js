@@ -21,6 +21,10 @@ var controlsButtonPic = document.createElement("img");
 var settingsButtonPic = document.createElement("img");
 var creditsButtonPic = document.createElement("img");
 
+var resumeButtonPic = document.createElement("img");
+var equipButtonPic = document.createElement("img");
+var quitButtonPic = document.createElement("img");
+
 var picsToLoad = 0;
 
 function countLoadedImageAndLaunchIfReady() {
@@ -55,7 +59,10 @@ function loadImages() {
 	{varName: playButtonPic, theFile: "play_button.png"},
 	{varName: controlsButtonPic, theFile: "controls_button.png"},
 	{varName: settingsButtonPic, theFile: "settings_button.png"},
-	{varName: creditsButtonPic, theFile: "credits_button.png"}
+	{varName: creditsButtonPic, theFile: "credits_button.png"},
+	{varName: resumeButtonPic, theFile: "resume_button.png"},
+	{varName: equipButtonPic, theFile: "equip_button.png"},
+	{varName: quitButtonPic, theFile: "quit_button.png"}
 	];
 
 	picsToLoad = imageList.length;
