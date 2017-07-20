@@ -42,7 +42,7 @@ function wreckClass() {
 
 	this.pickup = function(finder) {
 		stackInventory(this.inventory, finder.inventory);
-		this.inventory = [];
+		this.inventory.length = 0;
 		this.isDead = true;
 	}
 
