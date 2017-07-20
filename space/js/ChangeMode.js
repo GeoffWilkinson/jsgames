@@ -22,6 +22,7 @@ function modeTransition() {
 	} else if(transitionTimer < initialTransitionTimer/2) {
 		gameMode[prevGameMode] = false;
 		gameMode[nextGameMode] = true;
+		cursorVisible = false;
 	}
 }
 
