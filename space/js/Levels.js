@@ -26,7 +26,7 @@ function loadLevel(levelNumber) {
 function loadWave(levelNumber, waveNumber) {
 	thisLevel = levelNumber;
 	thisWave = waveNumber;
-	console.log(thisLevel + "," + thisWave);
+	console.log("level " + thisLevel + ", wave " + thisWave);
 
 	for(var i = 0; i < LEVELS[thisLevel][thisWave].ufos; i++) {
 		var newUFO = new UFOClass();

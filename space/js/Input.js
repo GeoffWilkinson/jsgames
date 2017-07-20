@@ -62,13 +62,13 @@ function mouseMoved(evt) {
 	mouseX = evt.clientX - rect.left - root.scrollLeft;
 	mouseY = evt.clientY - rect.top - root.scrollTop;
 	if(gameMode[0]) {
-		checkButtonHover();
+		checkButtonHoverTitle();
 	}
 }
 
 function mouseReleased(evt) {
 	if(gameMode[0]) {
-		handleButtonClick();
+		handleButtonClickTitle();
 	}
 }
 
