@@ -4,14 +4,18 @@
 // 2. minimap/HUD to track off screen entities.
 // 3. alternate control schemes...
 // 4. spawn exclusion zone around player for asteroids and UFOs.
-// 5. game over screen when player dies.
 // 6. stats page upon game over (therefore stat tracking in game).
 
 // QoL IN PROGRESS:
 
+// 5. game over screen when player dies.
+
 // 7. ship inventory with equippable items.
 // 8. post-level ship configuration.
+
 // 13. countdown between waves.
+// 14. inventory/equipment window.
+// 15. pause menu.
 
 // QoL DONE:
 
