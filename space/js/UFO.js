@@ -60,7 +60,7 @@ function UFOClass() {
 		this.idleRotation = Math.PI * this.idleRotationDegrees / 180;
 
 		this.aimAt(p1);
-		//this.fireCannon();
+		this.fireCannon();
 	}
 
 	this.aimAt = function(otherEntity) {
