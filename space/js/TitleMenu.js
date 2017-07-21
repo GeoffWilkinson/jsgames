@@ -14,14 +14,11 @@ var buttonHighlightTitleHeight = 48;
 var cursorVisible = false;
 
 function checkButtonHoverTitle() {
+	cursorVisible = false;
 	for(i = 0; i < buttonTitleX.length; i++) {
-		if(mouseX > buttonTitleX[i] && mouseX < buttonTitleX[i] + buttonTitleWidth[i]) {
-			if(mouseY > buttonTitleY[i] && mouseY < buttonTitleY[i] + buttonTitleHeight[i]) {
-				cursorVisible = true;
-				buttonHighlightTitleY = buttonTitleY[i];
-			}
-		} else {
-			cursorVisible = false;
+		if(mouseX > buttonTitleX[i] && mouseX < buttonTitleX[i] + buttonTitleWidth[i] && mouseY > buttonTitleY[i] && mouseY < buttonTitleY[i] + buttonTitleHeight[i]) {
+			cursorVisible = true;
+			buttonHighlightTitleY = buttonTitleY[i];
 		}
 	}
 }

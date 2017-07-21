@@ -14,14 +14,11 @@ var buttonHighlightPauseHeight = 48;
 // cursorVisible is reused for this menu.
 
 function checkButtonHoverPause() {
+	cursorVisible = false;
 	for(i = 0; i < buttonPauseX.length; i++) {
-		if(mouseX > buttonPauseX[i] && mouseX < buttonPauseX[i] + buttonPauseWidth[i]) {
-			if(mouseY > buttonPauseY[i] && mouseY < buttonPauseY[i] + buttonPauseHeight[i]) {
-				cursorVisible = true;
-				buttonHighlightPauseY = buttonPauseY[i];
-			}
-		} else {
-			cursorVisible = false;
+		if(mouseX > buttonPauseX[i] && mouseX < buttonPauseX[i] + buttonPauseWidth[i] && mouseY > buttonPauseY[i] && mouseY < buttonPauseY[i] + buttonPauseHeight[i]) {
+			cursorVisible = true;
+			buttonHighlightPauseY = buttonPauseY[i];
 		}
 	}
 }
