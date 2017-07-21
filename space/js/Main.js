@@ -1,4 +1,4 @@
-// QoL TO DO:
+// TO DO:
 
 // 1. make the playing field bigger.
 // 2. minimap/HUD to track off screen entities.
@@ -6,7 +6,7 @@
 // 4. spawn exclusion zone around player for asteroids and UFOs.
 // 6. stats page upon game over (therefore stat tracking in game).
 
-// QoL IN PROGRESS:
+// IN PROGRESS:
 
 // 5. game over screen when player dies.
 
@@ -16,7 +16,7 @@
 // 13. countdown between waves.
 // 14. inventory/equipment window.
 
-// QoL DONE:
+// DONE:
 
 // 9. temporary powerups.
 // 10. entity properties more complex, e.g. damage/hp
