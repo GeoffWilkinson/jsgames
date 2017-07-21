@@ -265,10 +265,12 @@ function gameLoop() {
 		drawInGame();
 	} else if(gameMode[3]) {
 		drawPauseScreen();
+	} else if(gameMode[4]) {
+		drawEquipScreen();
 	}
 
 	// draw UI
-	if(gameMode[1] || gameMode[3]) {
+	if(gameMode[1] || gameMode[3] || gameMode[4]) {
 		drawUI();
 	}
 

@@ -68,6 +68,8 @@ function mouseMoved(evt) {
 		checkButtonHoverTitle();
 	} else if(gameMode[3]) {
 		checkButtonHoverPause();
+	} else if(gameMode[4]) {
+		checkButtonHoverEquip();
 	}
 }
 
@@ -76,6 +78,8 @@ function mouseReleased(evt) {
 		handleButtonClickTitle();
 	} else if(gameMode[3]) {
 		handleButtonClickPause();
+	} else if(gameMode[4]) {
+		handleButtonClickEquip();
 	}
 }
 
@@ -88,7 +92,7 @@ function keyReleased(evt) {
 	if(evt.keyCode == KEY_P || evt.keyCode == KEY_ESC) {
 		if(gameMode[1]) {
 			switchMode(3, 1);
-		} else if(gameMode[3]) {
+		} else if(gameMode[3] || gameMode[4]) {
 			switchMode(1, 1);
 		}
 	}

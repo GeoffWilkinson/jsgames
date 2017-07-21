@@ -25,6 +25,12 @@ var resumeButtonPic = document.createElement("img");
 var equipButtonPic = document.createElement("img");
 var quitButtonPic = document.createElement("img");
 
+var backSmallButtonPic = document.createElement("img");
+var equipmentSmallButtonPic = document.createElement("img");
+var miscSmallButtonPic = document.createElement("img");
+var shipSmallButtonPic = document.createElement("img");
+var statsSmallButtonPic = document.createElement("img");
+
 var picsToLoad = 0;
 
 function countLoadedImageAndLaunchIfReady() {
@@ -62,7 +68,12 @@ function loadImages() {
 	{varName: creditsButtonPic, theFile: "credits_button.png"},
 	{varName: resumeButtonPic, theFile: "resume_button.png"},
 	{varName: equipButtonPic, theFile: "equip_button.png"},
-	{varName: quitButtonPic, theFile: "quit_button.png"}
+	{varName: quitButtonPic, theFile: "quit_button.png"},
+	{varName: backSmallButtonPic, theFile: "back_button_small.png"},
+	{varName: equipmentSmallButtonPic, theFile: "equipment_button_small.png"},
+	{varName: miscSmallButtonPic, theFile: "misc_button_small.png"},
+	{varName: shipSmallButtonPic, theFile: "ship_button_small.png"},
+	{varName: statsSmallButtonPic, theFile: "stats_button_small.png"}
 	];
 
 	picsToLoad = imageList.length;
